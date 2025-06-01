@@ -287,7 +287,13 @@ const index = (data) => {
       setIsPopupVisible(true);
     }
   };
-
+  const handleRedirect = (item) => {
+    if (item.type == "headshot") {
+      router.push(`/photo-studio/headshot/${item?._id}`);
+    } else {
+      router.push(`/photo-studio/luxuryshot/${item?._id}`);
+    }
+  };
   return (
     <div className="px-10 min-h-screen">
       {isLoading && <Loading title={"Please wait"} subTitle={subTitle} />}
@@ -387,7 +393,7 @@ const index = (data) => {
           {myAvatar?.data?.length > 0 ? (
             myAvatar?.data.map((avatar) => (
               <div
-                onClick={() => router.push(`/photo-studio/headshot/${avatar?._id}`)}
+                onClick={() => handleRedirect(avatar)}
                 key={avatar._id}
                 className="relative rounded-xl overflow-hidden shadow hover:shadow-md transition cursor-pointer"
               >

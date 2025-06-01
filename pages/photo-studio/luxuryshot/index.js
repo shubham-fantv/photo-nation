@@ -71,7 +71,7 @@ const Index = () => {
         gender: gender || "male",
         creditsUsed: 10,
         aspectRatio: "1:1",
-        headshots: selectedImages.map((item) => item._id),
+        luxuryshot: selectedImages.map((item) => item._id),
         imageInput: files ? files : [],
       };
       setLoading(true);
