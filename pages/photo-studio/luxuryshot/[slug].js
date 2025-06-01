@@ -297,7 +297,7 @@ export default function Index() {
 
                   {/* Thumbnail Gallery */}
                   <div className="bg-[#E8E6F5] rounded-2xl p-6">
-                    <div className="grid grid-cols-4 gap-6">
+                    <div className="grid grid-cols-8 gap-1">
                       {data?.images?.map((image, index) => (
                         <div key={image.id} className="text-center">
                           <div

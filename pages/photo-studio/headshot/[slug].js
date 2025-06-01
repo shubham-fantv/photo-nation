@@ -14,7 +14,7 @@ export default function Index() {
   const [categoryOrder, setCategoryOrder] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [isLoading, setLoading] = useState(false);
-
+  const [allAvatar, setAvatar] = useState();
   const [data, setData] = useState();
 
   const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
@@ -35,6 +35,18 @@ export default function Index() {
       onSuccess: ({ data }) => {
         setData(data);
         setSelectedImage(data?.images?.[0]);
+      },
+    }
+  );
+
+  const { isLoading: createdAvatar } = useQuery(
+    `${FANTV_API_URL}/api/v1/ai-avatar/user-avatars?page=1&limit=100`,
+    () => fetcher.get(`${FANTV_API_URL}/api/v1/ai-avatar/user-avatars?page=1&limit=100`),
+    {
+      enabled: !!router.query.slug,
+      refetchOnMount: "always",
+      onSuccess: ({ data }) => {
+        setAvatar(data.filter((item) => item.status == "succeeded"));
       },
     }
   );
@@ -189,6 +201,34 @@ export default function Index() {
           <div className="w-full md:w-[30%] bg-[#F6F4FF] p-4 border border-[#E4DDFF] ml-8  rounded-xl">
             <div>
               <div className="max-w-xl mx-auto pt-3">
+                <h2 className="text-sm font-medium mb-3">Avatars</h2>
+                <div className="flex gap-1 overflow-auto mb-4">
+                  {allAvatar?.map((img, idx) => (
+                    <div
+                      key={img._id}
+                      className={`flex w-20 h-20 flex-col items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
+                      onClick={() => router.replace(img?._id)}
+                    >
+                      <img
+                        src={img.finalImageUrl}
+                        alt={`${img?.category} style`}
+                        className="w-20 h-20 object-cover rounded-lg"
+                      />
+                    </div>
+                  ))}
+
+                  <div
+                    className={`flex flex-col w-20 h-20 items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
+                    onClick={() => router.replace("/photo-studio")}
+                  >
+                    <img
+                      src={"/images/icons/plus.svg"}
+                      alt={`style`}
+                      className="w-16 h-16 object-cover  m-auto rounded-lg"
+                    />
+                  </div>
+                </div>
+
                 <h2 className="text-sm font-medium mb-3">Select Headshot Style</h2>
                 <div className="flex gap-1 overflow-x-auto mb-4">
                   {mainImages.map((img, idx) => (
@@ -294,7 +334,7 @@ export default function Index() {
                   </div>
 
                   <div className="bg-[#E8E6F5] rounded-2xl p-6">
-                    <div className="grid grid-cols-4 gap-6">
+                    <div className="grid grid-cols-8 gap-1">
                       {data?.images?.map((image, index) => (
                         <div key={image.id} className="justify-center">
                           <div

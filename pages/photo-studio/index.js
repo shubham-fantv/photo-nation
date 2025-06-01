@@ -297,7 +297,7 @@ const index = (data) => {
       </div>
 
       <div className="mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-8">
           <div
             onClick={() => router.push("/photo-studio/luxuryshot")}
             className="flex justify-between items-center p-6 bg-[#F0F9FF] border border-[#7DD3FC] rounded-xl hover:bg-[#E0F2FE] transition cursor-pointer"
@@ -305,13 +305,20 @@ const index = (data) => {
             <div className="flex flex-col gap-4 max-w-[60%]">
               <button>
                 <div className="flex items-center gap-2 text-[#0EA5E9]">
-                  <span className="font-semibold text-lg text-[#0369A1]">
+                  <span className="font-semibold text-xl  text-[#0369A1]">
                     Luxuryshot photo Studio
                   </span>
                 </div>
               </button>
-              <p className="text-sm text-gray-700">
-                Create an AI avatar by describing its appearance and attributes with text prompts.
+              <p className="text-sm text-gray-700 pr-10">
+                Immerse yourself in breathtaking visuals with Luxuryshot Photo Studio. Simply choose
+                from our curated collection of stunning luxury styles, and our advanced AI will
+                instantly transform your photos into bespoke, high-fashion scenes. Achieve unique,
+                cinematic imagery that perfectly captures your desired aesthetic with just a few
+                clicks <br /> <br /> Explore dream scenarios, detailed environments, and captivating
+                looks without needing to write a single prompt. This studio offers an intuitive way
+                to generate aspirational, high-quality content, placing you directly into luxurious
+                settings and high-fashion editorials effortlessly
               </p>
             </div>
 
@@ -319,11 +326,11 @@ const index = (data) => {
             <div className="flex gap-2 relative">
               <img
                 src="https://assets.artistfirst.in/uploads/1747489542488-Ai_Avatar_Icon_1.png"
-                className="w-16 h-16 rounded-md object-cover"
+                className="w-64 h-64 rounded-md object-cover"
               />
               <img
                 src="https://assets.artistfirst.in/uploads/1747489568650-AI_Avatar_Icon_2.jpg"
-                className="w-16 h-16 rounded-md object-cover"
+                className="w-64 h-64 rounded-md object-cover"
               />
             </div>
           </div>
@@ -335,13 +342,20 @@ const index = (data) => {
             <div className="flex flex-col gap-4 max-w-[60%] ">
               <button>
                 <div className="flex items-center gap-2 text-[#7C3AED]">
-                  <span className="font-semibold text-lg text-[#4C1D95]">
+                  <span className="font-semibold text-xl text-[#4C1D95]">
                     Headshot Photo Studio
                   </span>
                 </div>
               </button>
-              <p className="text-sm text-gray-700">
-                Use existing photos to create a new avatar and multiple looks.
+              <p className="text-sm text-gray-700 pr-10">
+                Transform your photos into professional Headshots with Headshot Photo Studio. Use
+                your favorite existing images to instantly create a diverse collection of
+                high-quality headshots. Select from various professional styles and backdrops to
+                achieve the perfect look for any platform
+                <br /> <br /> Ideal for maintaining a polished and consistent brand identity, this
+                studio saves you valuable time and resources. Instantly generate multiple looks,
+                from different attire to various professional settings, ensuring you always have the
+                right headshot ready to impress
               </p>
             </div>
 
@@ -349,11 +363,11 @@ const index = (data) => {
             <div className="flex gap-2">
               <img
                 src="https://assets.artistfirst.in/uploads/1747488821569-Custom_Avatar_Icon_1.jpg"
-                className="w-16 h-16 rounded-md object-cover"
+                className="w-64 h-64 rounded-md object-cover"
               />
               <img
                 src="https://assets.artistfirst.in/uploads/1747488851625-Custom_Avatar_Icon_2.jpg"
-                className="w-16 h-16 rounded-md object-cover"
+                className="w-64 h-64 rounded-md object-cover"
               />
             </div>
           </div>
@@ -407,339 +421,7 @@ const index = (data) => {
           )}
         </div>
       </div>
-      {isPromptModalVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white w-full max-w-5xl rounded-xl p-6 relative grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Close Button */}
-            <button
-              onClick={() => setIsPromptModalVisible(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-black text-lg"
-            >
-              ✕
-            </button>
 
-            {/* LEFT: Form Fields */}
-            <div>
-              <h2 className="text-xl font-semibold mb-6">Create New AI Avatar</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700 font-medium mb-2">
-                {[
-                  ["Name", "name", "text"],
-                  ["Age", "age", "number"],
-                  ["Gender", "gender", "select"],
-                  ["Ethnicity", "ethnicity", "text"],
-                  ["Hair Color", "hairColor", "text"],
-                  ["Eye Color", "eyeColor", "text"],
-                  ["Clothing", "clothing", "text"],
-                  ["Expression", "expression", "text"],
-                  ["Style", "style", "text"],
-                  ["Orientation", "orientation", "text"],
-                  ["Pose", "pose", "text"],
-                ].map(([label, name, type]) => (
-                  <div key={name} className="flex flex-col">
-                    <label className="mb-1" htmlFor={name}>
-                      {label}
-                    </label>
-                    {type === "select" ? (
-                      <select
-                        name={name}
-                        value={form[name]}
-                        onChange={handleChange}
-                        className="border p-2 rounded-md"
-                      >
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                    ) : (
-                      <input
-                        type={type}
-                        name={name}
-                        value={form[name]}
-                        onChange={handleChange}
-                        className="border p-2 rounded-md"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Buttons */}
-              <div className="flex justify-end gap-3">
-                <button
-                  onClick={() => setIsPromptModalVisible(false)}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => {
-                    const {
-                      name,
-                      age,
-                      gender,
-                      ethnicity,
-                      hairColor,
-                      eyeColor,
-                      clothing,
-                      expression,
-                      style,
-                      orientation,
-                      pose,
-                    } = form;
-
-                    const promptParts = [
-                      age ? `${age}-year-old` : "",
-                      gender,
-                      ethnicity ? `of ${ethnicity} descent` : "",
-                      hairColor || eyeColor
-                        ? `with ${hairColor ? hairColor + " hair" : ""}${
-                            hairColor && eyeColor ? " and " : ""
-                          }${eyeColor ? eyeColor + " eyes" : ""}`
-                        : "",
-                      clothing ? `wearing a ${clothing}` : "",
-                      expression ? `in a ${expression} expression` : "",
-                      style ? `styled as a ${style}` : "",
-                      orientation ? `in a ${orientation} mode` : "",
-                      pose ? `showing ${pose}` : "",
-                    ];
-
-                    const generated = promptParts.filter(Boolean).join(", ") + ".";
-                    setPrompt(generated.trim());
-                    handleGenerateAvatar(generated, name, gender);
-                    setIsPromptModalVisible(false);
-                    setLoading(true);
-                  }}
-                  className="px-4 py-2 bg-black text-white rounded-md"
-                >
-                  Generate
-                </button>
-              </div>
-            </div>
-
-            {/* RIGHT: Image */}
-            <div className="flex items-center justify-center">
-              <img
-                src="https://video-assets.fantv.world/19c54a54-9384-4c0e-8fa1-50db9765b4bc.jpg"
-                alt="Prompt Preview"
-                className="rounded-lg w-[50%] h-auto object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-      {isPromptPhotoModalVisible && (
-        <div className="fixed mt-20 inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="overflow-y-auto max-h-[calc(90vh-1rem)] pr-2">
-            <div className="bg-white w-full max-w-5xl rounded-xl p-6 relative grid grid-cols-1 md:grid-cols-2 gap-6 relative overflow-hidden max-h-[85vh]">
-              {/* Close Button */}
-              <button
-                onClick={() => setIsPromptPhotoModalVisible(false)}
-                className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl font-bold"
-              >
-                ✕
-              </button>
-              {/* Title */}
-              <h2 className="text-xl font-semibold text-center mb-4">
-                Upload Photos of Your Avatar
-              </h2>
-              <p className="text-center text-sm text-gray-600 mb-4">
-                Upload photos to create multiple looks for your avatar
-              </p>
-
-              {/* Upload Box */}
-              <div>
-                <div className="h-200px border-2 border-dashed border-purple-300 bg-purple-50 rounded-xl p-8 text-center cursor-pointer hover:bg-purple-100 transition mb-2">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="text-purple-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 15a4 4 0 004 4h10a4 4 0 004-4V8a4 4 0 00-4-4H7a4 4 0 00-4 4v7z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 10l6.586-6.586a2 2 0 012.828 0L21 12"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-sm text-gray-600">Select upto 12 photos to upload</p>
-                    <p className="text-xs text-gray-500 mb-2">
-                      Upload PNG, JPG, HEIC, or WebP file up to 5MB each
-                    </p>
-                    {/* Image Preview */}
-
-                    {/* Image Preview */}
-
-                    {imagePreviews && (
-                      <div className="grid grid-cols-4 sm:grid-cols-4 gap-4 mb-6">
-                        {imagePreviews.map(({ url, localPreview }, idx) => (
-                          <div key={idx} className="relative group">
-                            <img
-                              src={localPreview || url}
-                              className="w-full h-16 object-cover rounded-md"
-                              alt="preview"
-                            />
-                            <button
-                              onClick={() => handleRemoveImage(url)}
-                              className="absolute top-0 right-0 bg-red-600 text-black rounded-full w-6 h-6 flex items-center justify-center"
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      className="hidden"
-                      ref={inputRef}
-                      onChange={handleImageChange}
-                      disabled={uploading}
-                    />
-
-                    <button
-                      onClick={() => {
-                        if (imagePreviews.length >= MAX_IMAGES) {
-                          alert("Maximum 12 images allowed.");
-                          return;
-                        }
-                        inputRef.current.click();
-                      }}
-                      disabled={uploading}
-                      className="bg-purple-500 text-white px-4 py-2 rounded-md text-sm hover:bg-purple-600"
-                    >
-                      {uploading ? "Uploading..." : "Select Photos"}
-                    </button>
-                  </div>
-                </div>
-                {/* Action Buttons */}
-                <div className="flex justify-center mt-2 gap-3">
-                  <button
-                    onClick={() => setIsPromptPhotoModalVisible(false)}
-                    className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleGeneratePhotoAvatar();
-                      setIsPromptPhotoModalVisible(false);
-                      setLoading(true);
-                    }}
-                    className="px-4 py-2 text-white bg-purple-500 rounded-md hover:bg-purple-600"
-                  >
-                    Generate Avatar
-                  </button>
-                </div>
-              </div>
-
-              {/* Photo Requirements */}
-              <div className="space-y-6">
-                {/* Good Photos */}
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-green-600 font-semibold">✔ Good Photos</span>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-2">
-                    Recent photos of yourself (just you), showing a mix of close-ups and full-body
-                    shots, with different angles, expressions (smiling, neutral, serious), and a
-                    variety of outfits. Make sure they are high-resolution and reflect your current
-                    appearance.
-                  </p>
-                  <div className="flex gap-2 overflow-x-auto">
-                    <img
-                      key={1}
-                      src={`https://assets.artistfirst.in/uploads/1747396154317-Good_Avatar_1.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-green-500"
-                      alt="good photo"
-                    />
-                    <img
-                      key={2}
-                      src={`https://assets.artistfirst.in/uploads/1747396178612-Good_Avatar_2.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-green-500"
-                      alt="good photo"
-                    />
-                    <img
-                      key={3}
-                      src={`https://assets.artistfirst.in/uploads/1747396196125-Good_Avatar_3.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-green-500"
-                      alt="good photo"
-                    />
-                    <img
-                      key={4}
-                      src={`https://assets.artistfirst.in/uploads/1747396217107-Good_Avatar_4.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-green-500"
-                      alt="good photo"
-                    />
-                    <img
-                      key={5}
-                      src={`https://assets.artistfirst.in/uploads/1747396229542-Good_Avatar_5.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-green-500"
-                      alt="good photo"
-                    />
-                  </div>
-                </div>
-
-                {/* Bad Photos */}
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-red-600 font-semibold">✖ Bad Photos</span>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-2">
-                    No group photos, hats, sunglasses, pets, heavy filters, low-resolution images,
-                    or screenshots. Avoid photos that are too old, overly edited, or don’t represent
-                    how you currently look.
-                  </p>
-                  <div className="flex gap-2 overflow-x-auto">
-                    <img
-                      key={1}
-                      src={`https://assets.artistfirst.in/uploads/1747915251733-Bad_Avatar_1.jpg`}
-                      className="w-20 h-28 rounded-md object-cover border border-red-500"
-                      alt="bad photo"
-                    />
-                    <img
-                      key={2}
-                      src={`https://assets.artistfirst.in/uploads/1747395752777-Bad_Avatar_2.jpg`}
-                      className="w-20 h-28 rounded-md object-cover border border-red-500"
-                      alt="bad photo"
-                    />
-                    <img
-                      key={3}
-                      src={`https://assets.artistfirst.in/uploads/1747395778037-Bad_Avatar_3.jpg`}
-                      className="w-20 h-28 rounded-md object-cover border border-red-500"
-                      alt="bad photo"
-                    />
-                    <img
-                      key={4}
-                      src={`https://assets.artistfirst.in/uploads/1747395795794-Bad_Avatar_4.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-red-500"
-                      alt="bad photo"
-                    />
-                    <img
-                      key={5}
-                      src={`https://assets.artistfirst.in/uploads/1747395814436-Bad_Avatar_5.webp`}
-                      className="w-20 h-28 rounded-md object-cover border border-red-500"
-                      alt="bad photo"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
       {isPopupVisible && (
         <LoginAndSignup
           callBackName={"uniqueCommunity"}
