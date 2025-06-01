@@ -12,6 +12,7 @@ import fetcher from "../../src/dataProvider";
 import useGTM from "../../src/hooks/useGTM";
 import { quotes } from "../../src/utils/common";
 const index = (data) => {
+  console.log("🚀 ~ index ~ data:", data);
   const [avatarData, setAvatarData] = useState([]);
   const router = useRouter();
   const [prompt, setPrompt] = useState("");
@@ -306,7 +307,7 @@ const index = (data) => {
               <button>
                 <div className="flex items-center gap-2 text-[#0EA5E9]">
                   <span className="font-semibold text-xl  text-[#0369A1]">
-                    Luxuryshot photo Studio
+                    Luxuryshot Photo Studio
                   </span>
                 </div>
               </button>

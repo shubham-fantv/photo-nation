@@ -1,24 +1,6 @@
 import React from "react";
 
-const AIAvatarSteps = () => {
-  const uploadedPhotos = [
-    "/images/headshot/photo1.png",
-    "/images/headshot/photo2.png",
-    "/images/headshot/photo3.png",
-    "/images/headshot/photo4.png",
-  ];
-
-  const aiGeneratedImages = [
-    "/images/headshot/ai1.png",
-    "/images/headshot/ai2.png",
-    "/images/headshot/ai3.png",
-    "/images/headshot/ai4.png",
-    "/images/headshot/ai5.png",
-    "/images/headshot/ai6.png",
-    "/images/headshot/ai7.png",
-    "/images/headshot/ai8.png",
-  ];
-
+const AIAvatarSteps = ({ uploadedPhotos, aiGeneratedImages }) => {
   return (
     <div className="w-full mx-auto  mt-8 ">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">Steps to Generate AI Avatar</h2>
@@ -42,15 +24,9 @@ const AIAvatarSteps = () => {
         <div className="mb-6">
           <h3 className="text-base font-semibold text-[#1E1E1E] mb-1">Step 02</h3>
           <p className="text-sm text-[#1E1E1EB2] mb-3">Our AI trains on your looks</p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex gap-4 overflow-x-auto ">
             {aiGeneratedImages.slice(0, 4).map((src, index) => (
-              <div key={index} className="relative ">
-                <img
-                  src={src}
-                  alt={`AI Generated ${index + 1}`}
-                  className="w-40 h-40 object-cover"
-                />
-              </div>
+              <img src={src} alt={`AI Generated ${index + 1}`} className="w-40 h-40 object-cover" />
             ))}
           </div>
         </div>
@@ -58,13 +34,13 @@ const AIAvatarSteps = () => {
         <div>
           <h3 className="text-base font-semibold text-[#1E1E1E] mb-1">Step 03</h3>
           <p className="text-sm text-[#1E1E1EB2] mb-3">Headshot ready in 30 minutes</p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex gap-4 overflow-x-auto ">
             {aiGeneratedImages.slice(4).map((src, index) => (
-              <div key={index} className="relative">
+              <span className=" relative flex min-w-40  gap-4 overflow-x-auto ">
                 <img
                   src={src}
                   alt={`AI Generated ${index + 5}`}
-                  className="w-full h-40 object-cover rounded-xl"
+                  className="w-40 h-40 object-cover rounded-xl"
                 />
                 <span
                   style={{
@@ -78,7 +54,7 @@ const AIAvatarSteps = () => {
                 >
                   AI generated
                 </span>
-              </div>
+              </span>
             ))}
           </div>
         </div>

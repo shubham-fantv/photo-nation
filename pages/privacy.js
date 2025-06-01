@@ -7,57 +7,57 @@ const Index = () => {
         <h1 className="text-2xl font-bold mb-4">Privacy</h1>
 
         <p className="mb-6 leading-relaxed text-black">
-          {` VIDEONATION PRIVACY POLICY We, ArtistFirst Technology FZE (“we”, “our”, “us”, or
-          “VideoNation”), are committed to protect the privacy of the users of VideoNation (“you”,
+          {` PhotoNation PRIVACY POLICY We, ArtistFirst Technology FZE (“we”, “our”, “us”, or
+          “PhotoNation”), are committed to protect the privacy of the users of PhotoNation (“you”,
           “your”, or “User”) and therefore, seek to follow the highest standards to secure and
           protect the information shared by you with us. This Privacy Policy describes the manner of
           collection, storage, use and sharing of personal information that is collected by
-          VideoNation from the Users and the choices and controls available to the Users regarding
-          the information provided to us when you avail the services of VideoNation for the purpose
+          PhotoNation from the Users and the choices and controls available to the Users regarding
+          the information provided to us when you avail the services of PhotoNation for the purpose
           of hosting, listening, viewing, publishing, transacting, displaying, or uploading content,
           information or views, through our products, features, technologies, software, and related
           services provided to you from our platforms, applications, websites, or through any other
           mode or media (collectively, the “Service”). This Privacy Policy is to be read in
-          conjunction with the VideoNation Terms of Use. All defined terms that have not been
-          specifically defined herein shall have the same meaning as provided under the VideoNation
+          conjunction with the PhotoNation Terms of Use. All defined terms that have not been
+          specifically defined herein shall have the same meaning as provided under the PhotoNation
           Terms of Use. CONSENT TO THE PRIVACY POLICY By using the Service and/or by clicking “I
           agree”, you agree to provide consent to our collection, use and sharing of your personal
-          information as described in this Privacy Policy. INFORMATION COLLECTED BY VIDEONATION In
-          order to provide the Service, VideoNation collects data via information provided to us by
+          information as described in this Privacy Policy. INFORMATION COLLECTED BY PhotoNation In
+          order to provide the Service, PhotoNation collects data via information provided to us by
           the Users, information collected while browsing or navigating through the Service,
           information inferred through usage and log data, and information collected from third
-          parties. a. Information provided to us by the User. VideoNation collects content,
+          parties. a. Information provided to us by the User. PhotoNation collects content,
           communications, and other information provided by the Users while using the Service,
-          including while creating an account without which VideoNation will not be able to provide
+          including while creating an account without which PhotoNation will not be able to provide
           the Service. The following personal information about the user may be collected when the
           User creates an account: E-mail address of the User Phone number of the User Name of the
           User Date of birth of the User Address and Country of the User Information from third
-          parties – the User may choose to share certain data with VideoNation from third parties if
-          the User chooses to register with VideoNation using a third-party service such as Google.
+          parties – the User may choose to share certain data with PhotoNation from third parties if
+          the User chooses to register with PhotoNation using a third-party service such as Google.
           The User may provide additional information for the user profile such as a photograph, and
           optional additional personal data in order to further personalize the user profile. b.
-          Information collected during the use of the Service: VideoNation collects information
+          Information collected during the use of the Service: PhotoNation collects information
           about how you use our Service such as the types of content that you view or engage with,
           the features you use, the actions you take, the accounts you interact with, the time,
           frequency, and duration of your activities. Further, when the User uses our Service,
-          VideoNation may also collect information relating to the User’s device such as: Device
+          PhotoNation may also collect information relating to the User’s device such as: Device
           attributes such as the operating system of the device, the make and model of the device
           and the browser type. IP address, connection and speed of the internet, time zone, device
           signals such as Bluetooth signals, information of nearby Wi-Fi access points. Information
           which you allow us to retrieve through permissions, such as GPS location, camera,
           microphone, photos. Cookies – The Service uses cookies and other similar technologies
           which are necessary to its functioning and to provide the Service. Some of these cookies
-          are essential to VideoNation in order to provide you with the Service. Information
-          provided by the User while creating content: VideoNation may collect and store all the
+          are essential to PhotoNation in order to provide you with the Service. Information
+          provided by the User while creating content: PhotoNation may collect and store all the
           content posted by you on the Service, including but not limited to videos, photographs,
-          sound recordings, musical works embodied therein, comments, and texts. VideoNation may
+          sound recordings, musical works embodied therein, comments, and texts. PhotoNation may
           collect any personal correspondences such as emails or letters sent by the Users, and any
           emails or letters sent by third parties/other users regarding your activity or posts.
-          VideoNation may collect information, including but not limited to, when you provide
+          PhotoNation may collect information, including but not limited to, when you provide
           feedback(s), modify your content or email preferences, participate in contests, respond to
           surveys, provide comments, submit forms, or communicate with us. This information may
           include your name, e-mail id, mobile number, location, etc. LEGAL BASIS FOR COLLECTING
-          INFORMATION In accordance with the prevailing laws, VideoNation will only collect and
+          INFORMATION In accordance with the prevailing laws, PhotoNation will only collect and
           process personal data about you where we have lawful basis, in a fair and transparent
           manner. Lawful basis on which we would process our personal information includes obtaining
           explicit "consent" from you for processing your personal information, processing for
@@ -76,12 +76,12 @@ const Index = () => {
           consistent experience across products and services offered by us. g. provide service
           updates or other non-marketing communications. h. provide you participation in interactive
           features of the websites such as rewards and feedback. i. fulfil our legal obligations or
-          in relation of any legal claims. VideoNation may collect information for statistical
+          in relation of any legal claims. PhotoNation may collect information for statistical
           analysis, i.e., to analyse and understand our audience, improve our service (including our
           user interface experiences), recommendation algorithms and delivery. HOW DO WE USE YOUR
           INFORMATION The Information as supplied by the Users enables us to improve the Service and
           provide you the most user-friendly experience. All required information is service
-          dependent, and VideoNation may use the above said user Information to, maintain, protect,
+          dependent, and PhotoNation may use the above said user Information to, maintain, protect,
           and improve the Service (including advertising on the Service) and for developing new
           services. We may also use your email address or other personally identifiable information
           to send commercial or marketing messages with your consent [with an option to
@@ -100,27 +100,27 @@ const Index = () => {
           the denial of certain services to you for lack of you providing the necessary personal
           information. When you register with the Service, we contact you from time to time about
           updating of your personal information to provide the users such features that we believe
-          may benefit/interest you. HOW IS YOUR INFORMATION SHARED a. VideoNation does not share
+          may benefit/interest you. HOW IS YOUR INFORMATION SHARED a. PhotoNation does not share
           your information with any third party without obtaining prior consent, with the exception
-          of the following limited circumstance: b. VideoNation may provide personal information
+          of the following limited circumstance: b. PhotoNation may provide personal information
           when it is requested or required by law or by any court of law or government to disclose,
           for the purpose of verification of identity, or for the prevention, detection,
           investigation including cyber incidents, or for prosecution and punishment of offences.
           These disclosures are made in good faith and belief that such disclosure is reasonably
-          necessary for complying with the applicable laws and regulations. c. VideoNation may
+          necessary for complying with the applicable laws and regulations. c. PhotoNation may
           provide personal information to our affiliates and other trusted businesses or persons
           such as service providers to help us with customer support, payment processing, data
           analytics, technical support, marketing support, or support for securing our systems. The
           information will be based on in compliance with this Privacy Policy and any other
-          appropriate confidentiality and security measures. d. VideoNation may share aggregated
+          appropriate confidentiality and security measures. d. PhotoNation may share aggregated
           statistical data with our partners, sponsors, and suppliers about how our users are
-          interacting with our Service and availing of the features offered. e. VideoNation may
+          interacting with our Service and availing of the features offered. e. PhotoNation may
           provide sponsors with reports containing aggregate statistical data about how our Users
           are interacting with our Service and to determine the kinds of people viewing their ads
           and how they are performing. This aggregated information may include demographic data such
           as age range and/or geographic location of groups of our customers. This aggregated data
           does not include contact details (such as names, addresses or email addresses) that can be
-          used to personally identify you or contact you. f. VideoNation may share your personal
+          used to personally identify you or contact you. f. PhotoNation may share your personal
           information in order to enforce applicable Terms of Use of the Service, including
           investigation of potential violations, to detect, prevent, or otherwise address fraud,
           security, or technical issues, to comply with any applicable law, legal obligation, to
@@ -131,12 +131,12 @@ const Index = () => {
           picture, if any, number of followers. Public information can also be seen, accessed,
           reshared or downloaded through third-party services such as search engines, APIs, and
           offline media such as TV, and by apps, websites and other services that integrate with our
-          Service. RETENTION OF INFORMATION VideoNation retains the information collected
+          Service. RETENTION OF INFORMATION PhotoNation retains the information collected
           information for as long as required in order to provide the Service. Personal data
           collected shall be retained as long as your account is maintained, and till the time our
           Service is used and accessed by you. The information will be deleted on a request from the
           User or at the deletion of the account. However, after the account is deleted or the User
-          has requested for the information to be deleted, VideoNation may archive and/or retain
+          has requested for the information to be deleted, PhotoNation may archive and/or retain
           some essential information for legal purposes. MANAGING THE INFORMATION AND EXERCISING
           YOUR RIGHTS When you use the Service, we make good faith efforts to provide you, as and
           when requested by you, with access to your personal information and shall further ensure
@@ -148,7 +148,7 @@ const Index = () => {
           privacy of others, or would be extremely impractical, or for which access is not otherwise
           required. In any case, where we provide information access and correction, we perform this
           service free of charge, except if doing so would require a disproportionate effort.
-          KEEPING PERSONAL DATA SAFE VideoNation takes appropriate security measures to protect
+          KEEPING PERSONAL DATA SAFE PhotoNation takes appropriate security measures to protect
           against unauthorized access to or unauthorized alteration, disclosure, or destruction of
           your information. These include appropriate technical and organisational measures
           including but not limited to internal reviews of our data collection, storage and
@@ -166,7 +166,7 @@ const Index = () => {
           PRIVACY POLICY The Service is not aimed or targeted towards children under the age of 18.
           We do not intend to or target to collect any information about children under the age of
           18. Children below the age of 18 must access or use Service only with the approval of and
-          under the supervision of their parent or legal guardian. VideoNation considers it the
+          under the supervision of their parent or legal guardian. PhotoNation considers it the
           responsibility of parents to monitor their children’s use of our Services. Nevertheless,
           it is our policy not to collect and process any personal information from children below
           18 years of age or offer to send any promotional materials to persons in that category. We
@@ -185,7 +185,7 @@ const Index = () => {
           published, you affirm your agreement to the updated terms. CONTACT US If you require any
           information or clarification regarding the use of your personal information or this
           Privacy Policy, or grievances with respect to use of your personal information, please
-          email us at: legal@VideoNation.in.`}
+          email us at: legal@PhotoNation.in.`}
         </p>
       </div>
     </div>

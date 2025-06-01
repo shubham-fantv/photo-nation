@@ -276,7 +276,7 @@ const Index = () => {
                         />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Head shot</h3>
+                    <h3 className="text-2xl font-bold text-white mb-4">Headshot</h3>
                     <p className="text-[#D2D2D2] leading-relaxed">
                       Create polished, professional headshots perfect for LinkedIn, company
                       websites, and business profiles. Choose from corporate, urban, or natural
@@ -303,7 +303,7 @@ const Index = () => {
                         />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Luxury shot</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Luxuryshot</h3>
                     <p className="text-pink-800 leading-relaxed">
                       Elevate your image with aspirational luxury shots. Ideal for branding, social
                       media campaigns, or visualizing success in high-end environments and exclusive

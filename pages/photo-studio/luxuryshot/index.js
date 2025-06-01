@@ -14,6 +14,24 @@ import AIAvatarSteps from "../../../src/component/HeadShot/AIAvatarSteps";
 import BadPhotos from "../../../src/component/HeadShot/BadPhotos";
 import GoodPhotos from "../../../src/component/HeadShot/GoodPhotos";
 
+const uploadedPhotos = [
+  "https://assets.artistfirst.in/uploads/1747830353356-Grand_Foyer_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830369370-City_View_Living_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830387171-Gourmet_Kitchen_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830404619-Refined_Study_LuxuryShot_A1.jpg",
+];
+
+const aiGeneratedImages = [
+  "https://assets.artistfirst.in/uploads/1747830337257-Forest_GT_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830214895-Star_Dining_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830089346-Altitude_Cabin_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830353356-Grand_Foyer_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830666578-Classic_Car_Rally_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830613767-Heli_Ski_Peak_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830686432-Art_Auction_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830292359-Musseum_Gala_LuxuryShot_A1.jpg",
+];
+
 const Index = () => {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
@@ -36,7 +54,7 @@ const Index = () => {
   const MAX_IMAGES = 12;
   const MAX_SIZE_MB = 5;
 
-  const [avatarName, setAvatarName] = useState("Arda Guler");
+  const [avatarName, setAvatarName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [gender, setGender] = useState("");
 
@@ -77,11 +95,11 @@ const Index = () => {
 
   const { isLoading: loadingHeadShot } = useQuery(
     `${FANTV_API_URL}/api/v1/homefeed`,
-    () => fetcher.get(`${FANTV_API_URL}/api/v1/headshot/headshot`),
+    () => fetcher.get(`${FANTV_API_URL}/api/v1/headshot/luxuryshot`),
     {
       refetchOnMount: "always",
       onSuccess: ({ data }) => {
-        setHeadShotStyleData(data.filter((item) => item.category !== "Natural"));
+        setHeadShotStyleData(data.filter((item) => item.category !== "Estates"));
       },
     }
   );
@@ -147,7 +165,7 @@ const Index = () => {
     {
       onSuccess: (response) => {
         setLoading(false);
-        router.push(`/image/headshot/${response?.data._id}`, undefined, { scroll: false });
+        router.push(`/photo-studio/luxuryshot/${response?.data._id}`, undefined, { scroll: false });
       },
       onError: (error) => {
         setLoading(false);
@@ -327,7 +345,7 @@ const Index = () => {
           <div className=" relative max-w-xl mx-auto pt-3 ">
             <h2 className="text-sm font-medium mb-3">Select Headshot Style</h2>
             {imagePreviews.length < 4 && (
-              <div class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10 rounded"></div>
+              <div class="absolute inset-0 bg-black/5 backdrop-blur-xs z-10 rounded"></div>
             )}
 
             <div className="flex gap-1 overflow-x-auto mb-4">
@@ -416,7 +434,7 @@ const Index = () => {
           Upload photos to create multiple looks for your avatar
         </h3>
         <div></div>
-        <AIAvatarSteps />
+        <AIAvatarSteps uploadedPhotos={uploadedPhotos} aiGeneratedImages={aiGeneratedImages} />
         <GoodPhotos />
         <BadPhotos />
       </div>

@@ -261,14 +261,6 @@ export default function Index() {
           <div className="flex-1 w-full flex flex-col pr-8 pl-4 items-center ">
             <div className="min-h-screen  w-full  p-6">
               <div className="  w-full  mx-auto">
-                {/* Header */}
-                <div className="text-center mb-8">
-                  <h1 className="text-4xl font-bold text-gray-800 mb-4">Create an Avatar</h1>
-                  <p className="text-lg text-gray-600">
-                    Upload photos to create multiple looks for your avatar
-                  </p>
-                </div>
-
                 {/* Main Content */}
                 <div className="bg-[#F6F4FF] rounded-2xl border border-[#E4DDFF] p-8 relative overflow-hidden">
                   <div className="flex justify-center ">

@@ -20,7 +20,7 @@ const Footer = () => {
           {/* Logo and Description Section */}
           <Grid item xs={12} md={8}>
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-              <Box component="img" src="/images/logo.svg" alt="videoNation" sx={{ height: 36 }} />
+              <Box component="img" src="/images/logo.svg" alt="PhotoNation" sx={{ height: 36 }} />
             </Box>
             <Typography variant="body2" sx={{ mb: 2, color: "#000" }}>
               The end-to-end platform for
@@ -30,7 +30,7 @@ const Footer = () => {
               Crafted with ❤️ in India
             </Typography>
             <Typography variant="body2" sx={{ color: "#000", fontSize: "0.875rem" }}>
-              © 2025 VideoNation. All rights reserved.
+              © 2025 PhotoNation. All rights reserved.
             </Typography>
           </Grid>
 

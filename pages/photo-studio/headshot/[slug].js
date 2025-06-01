@@ -5,6 +5,8 @@ import { API_BASE_URL, FANTV_API_URL } from "../../../src/constant/constants";
 import { useRouter } from "next/router";
 import fetcher from "../../../src/dataProvider";
 import { useSelector } from "react-redux";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 export default function Index() {
   const [timeLeft, setTimeLeft] = useState(30);
@@ -18,6 +20,7 @@ export default function Index() {
   const [data, setData] = useState();
 
   const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
+  console.log("🚀 ~ Index ~ selectedImage:", selectedImage);
 
   const { isLoggedIn, userData } = useSelector((state) => state.user);
 
@@ -164,6 +167,43 @@ export default function Index() {
   const mainImages = getMainImages();
   const relatedImages = getRelatedImages();
 
+  const imageData = [
+    // Extracted from your JSON
+    "https://video-assets.fantv.world/78ed02fd-38da-4c5e-9854-4aa7f30b9b64.jpg",
+    "https://video-assets.fantv.world/5d2cb807-d707-43fa-9eb1-00a0b33807d4.jpg",
+    "https://video-assets.fantv.world/b8b9ed72-d4f0-4a79-ab07-13fc867fefc0.jpg",
+    "https://video-assets.fantv.world/c480bbcb-61b2-460a-8bca-7384b54d3153.jpg",
+    "https://video-assets.fantv.world/97967ff3-9d8f-4066-9dee-d254d56ed103.jpg",
+    "https://video-assets.fantv.world/28333e0b-b70b-4773-a0e0-d43574ec2c4e.jpg",
+  ];
+
+  const handleDownload = async () => {
+    const zip = new JSZip();
+    const folder = zip.folder("headshots");
+
+    await Promise.all(
+      imageData.map(async (url, index) => {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        folder.file(`headshot_${index + 1}.jpg`, blob);
+      })
+    );
+
+    zip.generateAsync({ type: "blob" }).then((zipFile) => {
+      saveAs(zipFile, "headshots.zip");
+    });
+  };
+
+  const handleDownload1 = async () => {
+    for (let i = 0; i < imageData.length; i++) {
+      await downloadImage(imageData[i], i);
+    }
+  };
+
+  //  const handleDownload = () => {
+  //    alert("hello");
+  //  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {isLoading && <isLoading title={"Please wait"} />}
@@ -206,20 +246,21 @@ export default function Index() {
                   {allAvatar?.map((img, idx) => (
                     <div
                       key={img._id}
-                      className={`flex w-20 h-20 flex-col items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
+                      className={`flex w-24 h-24 overflow-x-auto flex-col items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
                       onClick={() => router.replace(img?._id)}
                     >
                       <img
-                        src={img.finalImageUrl}
+                        src={img?.finalImageUrl}
                         alt={`${img?.category} style`}
                         className="w-20 h-20 object-cover rounded-lg"
                       />
+                      <span className="text-xs wrap-1-line">{img?.name}</span>
                     </div>
                   ))}
 
                   <div
-                    className={`flex flex-col w-20 h-20 items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
-                    onClick={() => router.replace("/photo-studio")}
+                    className={`flex flex-col  w-24 h-24 items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
+                    onClick={() => router.replace("/photo-studio/headshot")}
                   >
                     <img
                       src={"/images/icons/plus.svg"}
@@ -301,14 +342,8 @@ export default function Index() {
           <div className="flex-1 w-full flex flex-col pr-8 pl-4 items-center ">
             <div className="min-h-screen  w-full ">
               <div className="w-full  mx-auto">
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-semibold">Create an Avatar</h2>
-                  <p className="text-lg text-gray-600">
-                    Upload photos to create multiple looks for your avatar
-                  </p>
-                </div>
-
                 <div className="bg-[#F6F4FF] rounded-2xl border border-[#E4DDFF] p-8 relative overflow-hidden">
+                  <h2 className="text-2xl text-center mb-3 font-semibold">{data?.name}</h2>
                   <div className="flex justify-center ">
                     <div className="relative">
                       <div className="w-80 h-80 rounded-3xl overflow-hidden border-4  shadow-2xl ">
@@ -355,11 +390,20 @@ export default function Index() {
                               }}
                             />
                           </div>
-                          <p className="text-sm font-medium text-gray-700 mt-2">
+                          <p className="text-sm font-medium text-center text-gray-700 mt-2">
                             Style {index + 1}
                           </p>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                  <div className="flex justify-center pt-4">
+                    <div
+                      onClick={() => handleDownload()}
+                      className="px-3 py-2 rounded-full w-max-content cursor-pointer"
+                      style={{ border: "1px solid #1E1E1E" }}
+                    >
+                      Download All
                     </div>
                   </div>
                 </div>
