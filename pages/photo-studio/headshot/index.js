@@ -265,7 +265,7 @@ const Index = () => {
   return (
     <div className="flex flex-col md:flex-row text-black md:gap-4">
       {(isLoading || loadingHeadShot) && <Loading title={"Please wait"} subTitle={subTitle} />}
-      <div className="w-full md:w-[30%] bg-[#FFFFFF0D] p-4 border-2 md:ml-8 mb-8  md:mb-0  rounded-xl">
+      <div className="w-full md:w-[30%] bg-[#FFFFFF0D] p-4 border-2 ml-0 md:ml-8 mb-8  md:mb-0  rounded-xl">
         <div>
           <div>
             <div className=" text-center cursor-pointer transition mb-2">
@@ -400,7 +400,7 @@ const Index = () => {
             </div>
           </div>
 
-          <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 1</h3>
+          <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 500</h3>
 
           {Math.floor(userData?.credits) < 6 && (
             <div className="text-center">

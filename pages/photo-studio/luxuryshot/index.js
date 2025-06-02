@@ -265,7 +265,7 @@ const Index = () => {
   return (
     <div className="flex flex-col md:flex-row text-black md:gap-4">
       {(isLoading || loadingHeadShot) && <Loading title={"Please wait"} subTitle={subTitle} />}
-      <div className="w-full md:w-[30%] bg-[#FFFFFF0D] p-4 border-2 ml-8  rounded-xl">
+      <div className="w-full md:w-[30%] bg-[#FFFFFF0D] p-4 border-2 ml-0 md:ml-8 rounded-xl">
         <div>
           <div>
             <div className=" text-center cursor-pointer transition mb-2">
@@ -400,7 +400,7 @@ const Index = () => {
             </div>
           </div>
 
-          <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 1</h3>
+          <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 500</h3>
 
           {Math.floor(userData?.credits) < 6 && (
             <div className="text-center">
@@ -429,7 +429,7 @@ const Index = () => {
       </div>
 
       <div className="flex-1 w-full flex flex-col pr-8 pl-4 items-center ">
-        <h2 className="text-2xl font-semibold">Create an Avatar</h2>
+        <h2 className="text-xl md:text-2xl font-semibold mt-5">Create an Avatar</h2>
         <h3 className="pt-2 font-semibold text-[#1E1E1EB2]">
           Upload photos to create multiple looks for your avatar
         </h3>
@@ -439,8 +439,8 @@ const Index = () => {
         <BadPhotos />
       </div>
 
-      <div className="min-h-screen relative">
-        {isOpen && (
+      {isOpen && (
+        <div className="min-h-screen relative">
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-3xl p-8 w-full max-w-lg mx-4 relative shadow-2xl">
               <div>
@@ -496,8 +496,8 @@ const Index = () => {
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <SweetAlert2 {...swalProps} onConfirm={(handleConfirm) => setSwalProps({ show: false })} />
     </div>

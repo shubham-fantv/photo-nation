@@ -83,7 +83,7 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
           />
           <div className="justify-center flex">
             <img
-              src={"/images/logo.svg"}
+              src={"/images/logo-white.svg"}
               alt="VideoNation Logo"
               width={140}
               loading="eager"

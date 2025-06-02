@@ -294,102 +294,133 @@ const index = (data) => {
       router.push(`/photo-studio/luxuryshot/${item?._id}`);
     }
   };
+
+  const handleNavigation = (path) => {
+    router.push(path);
+  };
+
   return (
-    <div className="px-10 min-h-screen">
+    <div className="px-4 sm:px-6 lg:px-10 min-h-screen">
       {isLoading && <Loading title={"Please wait"} subTitle={subTitle} />}
-      <div className="justify-center m-auto">
-        <h1 className="text-black text-[32px] font-semibold text-center leading-[38px]">
-          Photo Studio
+
+      <div className="justify-center m-auto max-w-6xl">
+        <h1 className="text-black text-2xl sm:text-3xl lg:text-[32px] font-semibold text-center leading-tight sm:leading-[38px] px-4">
+          Your AI-Powered Photography Studio
         </h1>
+        <p className="text-[#1E1E1EB2] text-sm sm:text-base lg:text-[16px] mt-2 font-semibold text-center px-4 max-w-4xl mx-auto">
+          From LinkedIn ready headshots to high fashion editorials create pro visuals in seconds
+        </p>
       </div>
 
-      <div className="mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-8">
+      <div className="mt-8 sm:mt-10 lg:mt-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
+          {/* Luxuryshot Studio Card */}
           <div
-            onClick={() => router.push("/photo-studio/luxuryshot")}
-            className="flex justify-between items-center p-6 bg-[#F0F9FF] border border-[#7DD3FC] rounded-xl hover:bg-[#E0F2FE] transition cursor-pointer"
+            onClick={() => handleNavigation("/photo-studio/luxuryshot")}
+            className="flex flex-col justify-between items-start p-4 sm:p-6 bg-[#F0F9FF] border border-[#7DD3FC] rounded-xl hover:bg-[#E0F2FE] transition cursor-pointer"
           >
-            <div className="flex flex-col gap-4 max-w-[60%]">
-              <button>
+            {/* Images Section */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-8 relative w-full">
+              <img
+                src="https://assets.artistfirst.in/uploads/1747489542488-Ai_Avatar_Icon_1.png"
+                className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
+              />
+              <img
+                src="https://assets.artistfirst.in/uploads/1747489568650-AI_Avatar_Icon_2.jpg"
+                className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
+              />
+            </div>
+
+            {/* Content Section */}
+            <div className="flex flex-col gap-3 sm:gap-4 mt-4 sm:mt-6 w-full">
+              <button className="text-left">
                 <div className="flex items-center gap-2 text-[#0EA5E9]">
-                  <span className="font-semibold text-xl  text-[#0369A1]">
+                  <span className="font-semibold text-lg sm:text-xl text-[#0369A1]">
                     Luxuryshot Photo Studio
                   </span>
                 </div>
               </button>
-              <p className="text-sm text-gray-700 pr-10">
+              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                 Immerse yourself in breathtaking visuals with Luxuryshot Photo Studio. Simply choose
                 from our curated collection of stunning luxury styles, and our advanced AI will
                 instantly transform your photos into bespoke, high-fashion scenes. Achieve unique,
                 cinematic imagery that perfectly captures your desired aesthetic with just a few
-                clicks <br /> <br /> Explore dream scenarios, detailed environments, and captivating
-                looks without needing to write a single prompt. This studio offers an intuitive way
-                to generate aspirational, high-quality content, placing you directly into luxurious
-                settings and high-fashion editorials effortlessly
+                clicks.
+                <br />
+                <br className="hidden sm:block" />
+                <span className="hidden sm:inline">
+                  Explore dream scenarios, detailed environments, and captivating looks without
+                  needing to write a single prompt. This studio offers an intuitive way to generate
+                  aspirational, high-quality content, placing you directly into luxurious settings
+                  and high-fashion editorials effortlessly.
+                </span>
               </p>
             </div>
 
-            {/* Right: Prompt Preview */}
-            <div className="flex gap-2 relative">
-              <img
-                src="https://assets.artistfirst.in/uploads/1747489542488-Ai_Avatar_Icon_1.png"
-                className="w-64 h-64 rounded-md object-cover"
-              />
-              <img
-                src="https://assets.artistfirst.in/uploads/1747489568650-AI_Avatar_Icon_2.jpg"
-                className="w-64 h-64 rounded-md object-cover"
-              />
-            </div>
+            <button className="bg-[#C2D8E7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto">
+              Create Luxuryshot
+            </button>
           </div>
 
+          {/* Headshot Studio Card */}
           <div
-            onClick={() => router.push("/photo-studio/headshot")}
-            className=" cursor-pointer flex justify-between items-center p-6 bg-[#F5F3FF] border border-[#A78BFA] rounded-xl hover:bg-[#EDE9FE] transition"
+            onClick={() => handleNavigation("/photo-studio/headshot")}
+            className="flex flex-col cursor-pointer justify-between items-start p-4 sm:p-6 bg-[#F5F3FF] border border-[#A78BFA] rounded-xl hover:bg-[#EDE9FE] transition"
           >
-            <div className="flex flex-col gap-4 max-w-[60%] ">
-              <button>
+            {/* Images Section */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-8 w-full">
+              <img
+                src="https://assets.artistfirst.in/uploads/1747488821569-Custom_Avatar_Icon_1.jpg"
+                className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
+              />
+              <img
+                src="https://assets.artistfirst.in/uploads/1747488851625-Custom_Avatar_Icon_2.jpg"
+                className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
+              />
+            </div>
+
+            {/* Content Section */}
+            <div className="flex flex-col gap-3 sm:gap-4 mt-4 sm:mt-6 w-full">
+              <button className="text-left">
                 <div className="flex items-center gap-2 text-[#7C3AED]">
-                  <span className="font-semibold text-xl text-[#4C1D95]">
+                  <span className="font-semibold text-lg sm:text-xl text-[#4C1D95]">
                     Headshot Photo Studio
                   </span>
                 </div>
               </button>
-              <p className="text-sm text-gray-700 pr-10">
+              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                 Transform your photos into professional Headshots with Headshot Photo Studio. Use
                 your favorite existing images to instantly create a diverse collection of
                 high-quality headshots. Select from various professional styles and backdrops to
-                achieve the perfect look for any platform
-                <br /> <br /> Ideal for maintaining a polished and consistent brand identity, this
-                studio saves you valuable time and resources. Instantly generate multiple looks,
-                from different attire to various professional settings, ensuring you always have the
-                right headshot ready to impress
+                achieve the perfect look for any platform.
+                <br />
+                <br className="hidden sm:block" />
+                <span className="hidden sm:inline">
+                  Ideal for maintaining a polished and consistent brand identity, this studio saves
+                  you valuable time and resources. Instantly generate multiple looks, from different
+                  attire to various professional settings, ensuring you always have the right
+                  headshot ready to impress.
+                </span>
               </p>
             </div>
 
-            {/* Right: Preview Images */}
-            <div className="flex gap-2">
-              <img
-                src="https://assets.artistfirst.in/uploads/1747488821569-Custom_Avatar_Icon_1.jpg"
-                className="w-64 h-64 rounded-md object-cover"
-              />
-              <img
-                src="https://assets.artistfirst.in/uploads/1747488851625-Custom_Avatar_Icon_2.jpg"
-                className="w-64 h-64 rounded-md object-cover"
-              />
-            </div>
+            <button className="bg-[#D1CDE7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto">
+              Create Headshot
+            </button>
           </div>
         </div>
+
+        {/* My Avatars Section */}
         {myAvatar?.data?.length > 0 && (
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex justify-between items-center mt-6 sm:mt-8 px-2 sm:px-0">
             <div>
-              <p variant="h5" className="font-semibold text-2xl text-[#1E1E1E]">
-                My Avatars
-              </p>
+              <p className="font-semibold text-xl sm:text-2xl text-[#1E1E1E]">My Avatars</p>
             </div>
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6">
+        {/* Avatars Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-2 sm:p-6">
           {myAvatar?.data?.length > 0 ? (
             myAvatar?.data.map((avatar) => (
               <div
@@ -397,7 +428,7 @@ const index = (data) => {
                 key={avatar._id}
                 className="relative rounded-xl overflow-hidden shadow hover:shadow-md transition cursor-pointer"
               >
-                {avatar.finalImageUrl != "" ? (
+                {avatar.finalImageUrl !== "" ? (
                   <div className="relative w-full aspect-square">
                     <img
                       src={avatar.finalImageUrl}
@@ -406,29 +437,39 @@ const index = (data) => {
                     />
                   </div>
                 ) : (
-                  <div className="w-full h-48 bg-black flex items-center justify-center">
-                    <p className="text-white text-lg font-medium"></p>
+                  <div className="w-full aspect-square bg-black flex items-center justify-center">
+                    <p className="text-white text-sm sm:text-lg font-medium"></p>
                   </div>
                 )}
 
-                {/* Optional overlay for status other than 'completed' */}
-                {avatar?.status == "processing" && (
-                  <div className="absolute h-48 inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-xl">
-                    <p className="text-white font-medium text-lg">{avatar?.status}</p>
+                {/* Processing Overlay */}
+                {avatar?.status === "processing" && (
+                  <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-xl">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white mx-auto mb-2"></div>
+                      <p className="text-white font-medium text-xs sm:text-sm capitalize">
+                        {avatar?.status}
+                      </p>
+                    </div>
                   </div>
                 )}
 
                 <div className="p-2 space-y-1">
-                  <div className="text-base font-semibold text-gray-800">{avatar.name}</div>
+                  <div className="text-sm sm:text-base font-semibold text-gray-800 truncate">
+                    {avatar.name}
+                  </div>
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-gray-500 text-sm">No avatars found.</div>
+            <div className="col-span-full text-gray-500 text-sm text-center py-8">
+              No avatars found.
+            </div>
           )}
         </div>
       </div>
 
+      {/* Modals */}
       {isPopupVisible && (
         <LoginAndSignup
           callBackName={"uniqueCommunity"}

@@ -240,7 +240,7 @@ export default function Index() {
         </div>
       ) : (
         <div className="flex flex-col md:flex-row text-black md:gap-4">
-          <div className="w-full md:w-[30%] bg-[#F6F4FF] p-4 border border-[#E4DDFF] ml-8  rounded-xl">
+          <div className="w-full md:w-[30%] bg-[#F6F4FF] p-4 border border-[#E4DDFF] ml-0 md:ml-8  rounded-xl">
             <div>
               <div className="max-w-xl mx-auto pt-3">
                 <h2 className="text-sm font-medium mb-3">Avatars</h2>
@@ -341,7 +341,7 @@ export default function Index() {
               </div>
             </div>
           </div>
-          <div className="flex-1 w-full flex flex-col pr-8 pl-4 items-center ">
+          <div className="flex-1 w-full flex flex-col pt-5 md:pt-0 pr-0 md:pr-8 pl-0 md:pl-4 items-center ">
             <div className="min-h-screen  w-full ">
               <div className="w-full  mx-auto">
                 <div className="bg-[#F6F4FF] rounded-2xl border border-[#E4DDFF] p-8 relative overflow-hidden">
@@ -370,15 +370,15 @@ export default function Index() {
                     <p className="text-gray-600">{selectedImage?.description}</p>
                   </div>
 
-                  <div className="bg-[#E8E6F5] rounded-2xl p-6">
-                    <div className="grid grid-cols-8 gap-1">
+                  <div className="bg-[#E8E6F5] rounded-2xl p-3 sm:p-4 lg:p-6">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3 lg:gap-1">
                       {data?.images?.map((image, index) => (
-                        <div key={image.id} className="justify-center">
+                        <div key={image.id} className="flex flex-col items-center">
                           <div
-                            className={`w-20 h-20 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg ${
+                            className={`w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg ${
                               selectedImage?._id === image?._id
-                                ? "ring-4 ring-purple-400 shadow-lg scale-105"
-                                : "ring-2 ring-gray-200 hover:ring-purple-300"
+                                ? "ring-2 sm:ring-4 ring-purple-400 shadow-lg scale-105"
+                                : "ring-1 sm:ring-2 ring-gray-200 hover:ring-purple-300"
                             }`}
                             onClick={() => handleImageClick(image)}
                           >
@@ -392,12 +392,35 @@ export default function Index() {
                               }}
                             />
                           </div>
-                          <p className="text-sm font-medium text-center text-gray-700 mt-2">
-                            {image?.headshotId?.category}
+                          <p className="text-xs sm:text-sm font-medium text-center text-gray-700 mt-1 sm:mt-2 leading-tight max-w-full truncate px-1">
+                            {image?.headshotId?.style}
                           </p>
                         </div>
                       ))}
                     </div>
+
+                    {/* Selected Image Info - Mobile Only */}
+                    {selectedImage && (
+                      <div className="mt-4 p-3 bg-white rounded-xl shadow-sm sm:hidden">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                            <img
+                              src={selectedImage.imageUrl}
+                              alt={selectedImage.description}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-gray-900 truncate">
+                              {selectedImage?.headshotId?.style}
+                            </p>
+                            <p className="text-xs text-gray-600 truncate">
+                              {selectedImage.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="flex justify-center pt-4">
                     <div
