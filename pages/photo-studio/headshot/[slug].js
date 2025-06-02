@@ -209,7 +209,7 @@ export default function Index() {
       {isLoading && <isLoading title={"Please wait"} />}
       <div className="px-6 pb-4">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/photo-studio")}
           className="flex items-center pl-2 gap-2 text-gray-600 hover:text-gray-800 transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -242,11 +242,11 @@ export default function Index() {
             <div>
               <div className="max-w-xl mx-auto pt-3">
                 <h2 className="text-sm font-medium mb-3">Avatars</h2>
-                <div className="flex gap-1 overflow-auto mb-4">
+                <div className="flex gap-1 overflow-x-auto mb-4 whitespace-nowrap">
                   {allAvatar?.map((img, idx) => (
                     <div
                       key={img._id}
-                      className={`flex w-24 h-24 overflow-x-auto flex-col items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
+                      className="flex-shrink-0 flex flex-col cursor-pointer border-2 rounded-xl border-transparent"
                       onClick={() => router.replace(img?._id)}
                     >
                       <img
@@ -254,18 +254,18 @@ export default function Index() {
                         alt={`${img?.category} style`}
                         className="w-20 h-20 object-cover rounded-lg"
                       />
-                      <span className="text-xs wrap-1-line">{img?.name}</span>
+                      <span className="text-xs text-center mt-1 w-20 truncate">{img?.name}</span>
                     </div>
                   ))}
 
                   <div
-                    className={`flex flex-col  w-24 h-24 items-center cursor-pointer border-2 rounded-xl  border-transparent}`}
+                    className="flex-shrink-0 flex flex-col w-24 h-24 items-center cursor-pointer border-2 rounded-xl border-transparent"
                     onClick={() => router.replace("/photo-studio/headshot")}
                   >
                     <img
                       src={"/images/icons/plus.svg"}
-                      alt={`style`}
-                      className="w-16 h-16 object-cover  m-auto rounded-lg"
+                      alt="Add new style"
+                      className="w-16 h-16 object-cover m-auto rounded-lg"
                     />
                   </div>
                 </div>
@@ -391,7 +391,7 @@ export default function Index() {
                             />
                           </div>
                           <p className="text-sm font-medium text-center text-gray-700 mt-2">
-                            Style {index + 1}
+                            {image?.headshotId?.category}
                           </p>
                         </div>
                       ))}

@@ -23,8 +23,7 @@ const Footer = () => {
               <Box component="img" src="/images/logo.svg" alt="PhotoNation" sx={{ height: 36 }} />
             </Box>
             <Typography variant="body2" sx={{ mb: 2, color: "#000" }}>
-              The end-to-end platform for
-              <br /> creators powered by AI
+              Your Photos, AI-Perfected Headshots & Luxuryshots
             </Typography>
             <Typography variant="body2" sx={{ color: "#000", fontSize: "0.875rem" }}>
               Crafted with ❤️ in India

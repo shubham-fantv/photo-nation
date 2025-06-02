@@ -56,11 +56,11 @@ const UserProfileDropdown = () => {
               <hr className="my-1 border-gray-200" />
 
               <a
-                href="/"
+                href="/subscription"
                 className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 <User className="mr-2 h-4 w-4 text-gray-500" />
-                Profile
+                Manage Subscription
               </a>
 
               <button

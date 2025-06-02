@@ -233,7 +233,10 @@ const Index = () => {
 
                 {/* Launch App Button */}
                 <div className="text-center">
-                  <button className="bg-[#000] border border-white  text-white px-6 py-3 rounded-full text-lg font-semibold  shadow-lg">
+                  <button
+                    onClick={() => router.push("/photo-studio")}
+                    className="bg-[#000] border border-white  text-white px-6 py-3 rounded-full text-lg font-semibold  shadow-lg"
+                  >
                     Launch App
                   </button>
                 </div>
@@ -290,14 +293,14 @@ const Index = () => {
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="aspect-square rounded-2xl overflow-hidden">
                         <img
-                          src="https://assets.artistfirst.in/uploads/1747722518107-Urban_Sleek_Headshot_A1.jpg"
+                          src="https://assets.artistfirst.in/uploads/1747830089346-Altitude_Cabin_LuxuryShot_A1.jpg"
                           alt="Luxury shot 1"
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="aspect-square rounded-2xl overflow-hidden">
                         <img
-                          src="https://assets.artistfirst.in/uploads/1747730359361-Green_Corridor_Headshot_A1.jpg"
+                          src="https://assets.artistfirst.in/uploads/1747830666578-Classic_Car_Rally_LuxuryShot_A1.jpg"
                           alt="Luxury shot 2"
                           className="w-full h-full object-cover"
                         />

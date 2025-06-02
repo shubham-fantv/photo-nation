@@ -288,7 +288,7 @@ const index = (data) => {
     }
   };
   const handleRedirect = (item) => {
-    if (item.type == "headshot") {
+    if (item?.type == "headshot") {
       router.push(`/photo-studio/headshot/${item?._id}`);
     } else {
       router.push(`/photo-studio/luxuryshot/${item?._id}`);
