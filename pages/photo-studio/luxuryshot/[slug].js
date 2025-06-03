@@ -7,6 +7,7 @@ import fetcher from "../../../src/dataProvider";
 import { useSelector } from "react-redux";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import Loading from "../../../src/component/common/Loading/loading";
 
 export default function Index() {
   const [timeLeft, setTimeLeft] = useState(30);
@@ -60,9 +61,7 @@ export default function Index() {
     {
       onSuccess: (response) => {
         setLoading(false);
-        router.replace(`/photo-studio/luxuryshot/${response?.data._id}`, undefined, {
-          scroll: false,
-        });
+        router.reload();
       },
       onError: (error) => {
         setLoading(false);
@@ -188,7 +187,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {isLoading && <isLoading title={"Please wait"} />}
+      {isLoading && <Loading title={"Please wait"} />}
       <div className="px-6 pb-4">
         <button
           onClick={() => router.push("/photo-studio")}
@@ -225,21 +224,6 @@ export default function Index() {
               <div className="max-w-xl mx-auto pt-3">
                 <h2 className="text-sm font-medium mb-3">Avatars</h2>
                 <div className="flex gap-1 overflow-x-auto mb-4 whitespace-nowrap">
-                  {allAvatar?.map((img, idx) => (
-                    <div
-                      key={img._id}
-                      className="flex-shrink-0 flex flex-col cursor-pointer border-2 rounded-xl border-transparent"
-                      onClick={() => router.replace(img?._id)}
-                    >
-                      <img
-                        src={img?.finalImageUrl}
-                        alt={`${img?.category} style`}
-                        className="w-20 h-20 object-cover rounded-lg"
-                      />
-                      <span className="text-xs text-center mt-1 w-20 truncate">{img?.name}</span>
-                    </div>
-                  ))}
-
                   <div
                     className="flex-shrink-0 flex flex-col w-24 h-24 items-center cursor-pointer border-2 rounded-xl border-transparent"
                     onClick={() => router.replace("/photo-studio/luxuryshot")}
@@ -249,7 +233,26 @@ export default function Index() {
                       alt="Add new style"
                       className="w-16 h-16 object-cover m-auto rounded-lg"
                     />
+                    <span className="text-xs text-center mt-1">New</span>
                   </div>
+                  {allAvatar?.map((img, idx) => (
+                    <div
+                      key={img._id}
+                      className={`flex-shrink-0 flex flex-col cursor-pointer border-2 rounded-xl ${
+                        router?.query?.slug === img?._id
+                          ? "border-purple-500"
+                          : "border-transparent"
+                      }`}
+                      onClick={() => router.replace(img?._id)}
+                    >
+                      <img
+                        src={img?.finalImageUrl}
+                        alt={`${img?.category} style`}
+                        className={`w-20 h-20 object-cover rounded-lg `}
+                      />
+                      <span className="text-xs text-center mt-1 w-20 truncate">{img?.name}</span>
+                    </div>
+                  ))}
                 </div>
 
                 <h2 className="text-sm font-semibold my-3">Select Luxuryshot Style</h2>

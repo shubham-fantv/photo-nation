@@ -9,8 +9,8 @@ const AppSeo = () => {
   return (
     <>
       <DefaultSeo
-        title="Video Nation"
-        description="Create Music songs using AI"
+        title="PhotoNation"
+        // description="Create Music songs using AI"
         additionalMetaTags={[
           {
             property: "al:android:url",

@@ -352,7 +352,7 @@ const Index = () => {
                       <p className="text-pink-800 leading-relaxed text-sm sm:text-base">
                         Elevate your image with aspirational luxury shots. Ideal for branding,
                         social media campaigns, or visualizing success in high-end environments and
-                        exclusive settings
+                        exclusive settings extremely
                       </p>
                     </div>
                   </div>

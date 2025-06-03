@@ -327,7 +327,7 @@ const index = (data) => {
               />
               <img
                 src="https://assets.artistfirst.in/uploads/1747489568650-AI_Avatar_Icon_2.jpg"
-                className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
+                className="hidden md:block w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
             </div>
 
@@ -343,17 +343,7 @@ const index = (data) => {
               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                 Immerse yourself in breathtaking visuals with Luxuryshot Photo Studio. Simply choose
                 from our curated collection of stunning luxury styles, and our advanced AI will
-                instantly transform your photos into bespoke, high-fashion scenes. Achieve unique,
-                cinematic imagery that perfectly captures your desired aesthetic with just a few
-                clicks.
-                <br />
-                <br className="hidden sm:block" />
-                <span className="hidden sm:inline">
-                  Explore dream scenarios, detailed environments, and captivating looks without
-                  needing to write a single prompt. This studio offers an intuitive way to generate
-                  aspirational, high-quality content, placing you directly into luxurious settings
-                  and high-fashion editorials effortlessly.
-                </span>
+                instantly transform your photos into bespoke, high-fashion scenes
               </p>
             </div>
 
@@ -375,7 +365,7 @@ const index = (data) => {
               />
               <img
                 src="https://assets.artistfirst.in/uploads/1747488851625-Custom_Avatar_Icon_2.jpg"
-                className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
+                className=" hidden md:block w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
             </div>
 
@@ -391,16 +381,7 @@ const index = (data) => {
               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                 Transform your photos into professional Headshots with Headshot Photo Studio. Use
                 your favorite existing images to instantly create a diverse collection of
-                high-quality headshots. Select from various professional styles and backdrops to
-                achieve the perfect look for any platform.
-                <br />
-                <br className="hidden sm:block" />
-                <span className="hidden sm:inline">
-                  Ideal for maintaining a polished and consistent brand identity, this studio saves
-                  you valuable time and resources. Instantly generate multiple looks, from different
-                  attire to various professional settings, ensuring you always have the right
-                  headshot ready to impress.
-                </span>
+                high-quality headshots
               </p>
             </div>
 
