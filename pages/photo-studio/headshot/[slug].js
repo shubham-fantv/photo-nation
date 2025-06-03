@@ -166,23 +166,13 @@ export default function Index() {
   const mainImages = getMainImages();
   const relatedImages = getRelatedImages();
 
-  const imageData = [
-    // Extracted from your JSON
-    "https://video-assets.fantv.world/78ed02fd-38da-4c5e-9854-4aa7f30b9b64.jpg",
-    "https://video-assets.fantv.world/5d2cb807-d707-43fa-9eb1-00a0b33807d4.jpg",
-    "https://video-assets.fantv.world/b8b9ed72-d4f0-4a79-ab07-13fc867fefc0.jpg",
-    "https://video-assets.fantv.world/c480bbcb-61b2-460a-8bca-7384b54d3153.jpg",
-    "https://video-assets.fantv.world/97967ff3-9d8f-4066-9dee-d254d56ed103.jpg",
-    "https://video-assets.fantv.world/28333e0b-b70b-4773-a0e0-d43574ec2c4e.jpg",
-  ];
-
   const handleDownload = async () => {
     const zip = new JSZip();
     const folder = zip.folder("headshots");
 
     await Promise.all(
-      imageData.map(async (url, index) => {
-        const response = await fetch(url);
+      data?.images.map(async ({ imageUrl }, index) => {
+        const response = await fetch(imageUrl);
         const blob = await response.blob();
         folder.file(`headshot_${index + 1}.jpg`, blob);
       })
@@ -192,16 +182,6 @@ export default function Index() {
       saveAs(zipFile, "headshots.zip");
     });
   };
-
-  const handleDownload1 = async () => {
-    for (let i = 0; i < imageData.length; i++) {
-      await downloadImage(imageData[i], i);
-    }
-  };
-
-  //  const handleDownload = () => {
-  //    alert("hello");
-  //  };
 
   return (
     <div className="min-h-screen flex flex-col">
