@@ -3,16 +3,17 @@ import { trackEvent } from "../../mixpanelClient";
 export const GTM_ID = "GTM-PJRMHNSR";
 
 export const pageview = (url) => {
-  // window.dataLayer?.push({
-  //   event: "Page View",
-  //   page_path: url,
-  // });
+  window.dataLayer?.push({
+    event: "Page View",
+    page_path: url,
+  });
 };
 
 export const event = ({ event, ...rest }) => {
-  // window.dataLayer?.push({
-  //   event,
-  //   ...rest,
-  // });
-  // trackEvent(event, { ...rest });
+  window.dataLayer?.push({
+    event,
+    app_id: "photonation",
+    ...rest,
+  });
+  trackEvent(event, { ...rest });
 };

@@ -3,6 +3,12 @@ import React, { useState } from "react";
 
 import LoginAndSignup from "../src/component/feature/Login";
 import { useRouter } from "next/router";
+import Lottie from "lottie-react";
+import UploadPhotos from "../public/images/lottie/upload-photos.json";
+import Generate from "../public/images/lottie/generate-shot.json";
+import PickStyle from "../public/images/lottie/pick-any-style.json";
+import Download from "../public/images/lottie/download-shot.json";
+import useGTM from "../src/hooks/useGTM";
 
 const headshots = [
   {
@@ -68,32 +74,6 @@ const headshots = [
     alt: "Professional headshot 12",
   },
 ];
-const steps = [
-  {
-    id: 1,
-    title: "Upload Photos",
-    description:
-      "Easily upload your photos. Clear, well-lit images work best for stunning transformations",
-  },
-  {
-    id: 2,
-    title: "Pick any style",
-    description:
-      "Browse our diverse gallery of professional headshots and lifestyle templates. Find your perfect look",
-  },
-  {
-    id: 3,
-    title: "Generate",
-    description:
-      "Our advanced AI instantly crafts your new image based on your photos and chosen style",
-  },
-  {
-    id: 4,
-    title: "Download",
-    description:
-      "Receive high-resolution results ready for your portfolio, social media, or professional profiles",
-  },
-];
 
 const useCases = [
   { name: "LinkedIn", icon: "/images/photo-studio/home/linked.png" },
@@ -109,6 +89,8 @@ const Index = () => {
     login: false,
   });
 
+  const { sendEvent } = useGTM();
+
   const router = useRouter();
   const handleLoginPopupClose = () => {
     setIsPopupVisible({ login: false });
@@ -117,31 +99,57 @@ const Index = () => {
   // Mock data for steps
   const steps = [
     {
+      image: UploadPhotos,
       id: 1,
-      title: "Upload Photos",
+      title: "UPLOAD PHOTOS",
       description:
         "Upload 10-20 high-quality photos of yourself from different angles and lighting conditions.",
     },
     {
-      id: 2,
-      title: "AI Training",
-      description:
-        "Our advanced AI analyzes your photos and learns your unique features and characteristics.",
-    },
-    {
+      image: PickStyle,
       id: 3,
-      title: "Choose Style",
+      title: " PICK ANY STYLE",
       description:
         "Select from various professional styles, backgrounds, and settings for your photos.",
     },
     {
+      image: Generate,
+      id: 2,
+      title: "GENERATE",
+      description:
+        "Our advanced AI analyzes your photos and learns your unique features and characteristics.",
+    },
+
+    {
+      image: Download,
       id: 4,
-      title: "Generate",
+      title: "DOWNLOAD",
       description: "Receive your stunning, professional-quality AI-generated photos in minutes.",
     },
   ];
 
   const handleNavigation = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Craft Your Perfect Look",
+      interaction_type: "Standard Button",
+      section_name: "Header",
+      navigation_group: "Studios",
+      button_id: "hdr_lp_primary_cta_btn",
+      page_name: "Landing Page",
+    });
+    router.push("/photo-studio");
+  };
+  const handleNavigationLaunch = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Launch App",
+      interaction_type: "Standard Button",
+      section_name: "Header",
+      navigation_group: "Studios",
+      button_id: "section_lp_primary_cta_btn",
+      page_name: "Landing Page",
+    });
     router.push("/photo-studio");
   };
 
@@ -248,16 +256,17 @@ const Index = () => {
                   {steps.map((step) => (
                     <div key={step.id} className="flex flex-col">
                       <div className="rounded-xl mb-4 lg:mb-6 border-4 sm:border-[7px] border-[#FFFFFF33]">
-                        <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 h-48 sm:h-56 lg:h-64 flex items-center justify-center">
-                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-600 text-center">
+                        <div className="bg-white rounded-xl h-48 sm:h-56 lg:h-64 flex items-center justify-center">
+                          {/* <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-600 text-center">
                             {step.title}
-                          </h3>
+                          </h3> */}
+                          <Lottie animationData={step.image} loop={true} />
                         </div>
                       </div>
 
                       <div className="text-left">
                         <h4 className="text-lg sm:text-xl font-bold text-white mb-2 lg:mb-3">
-                          Step {String(step.id).padStart(2, "0")}
+                          {step.title}
                         </h4>
                         <p className="text-purple-200 leading-relaxed text-sm sm:text-base">
                           {step.description}
@@ -270,7 +279,7 @@ const Index = () => {
                 {/* Launch App Button */}
                 <div className="text-center">
                   <button
-                    onClick={handleNavigation}
+                    onClick={handleNavigationLaunch}
                     className="bg-[#000] border border-white text-white px-6 py-3 rounded-full text-base sm:text-lg font-semibold shadow-lg"
                   >
                     Launch App
@@ -317,7 +326,7 @@ const Index = () => {
                         </div>
                       </div>
                       <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
-                        Headshot
+                        Headshot Photos
                       </h3>
                       <p className="text-[#D2D2D2] leading-relaxed text-sm sm:text-base">
                         Create polished, professional headshots perfect for LinkedIn, company
@@ -347,7 +356,7 @@ const Index = () => {
                         </div>
                       </div>
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
-                        Luxuryshot
+                        Luxury Photos
                       </h3>
                       <p className="text-pink-800 leading-relaxed text-sm sm:text-base">
                         Elevate your image with aspirational luxury shots. Ideal for branding,

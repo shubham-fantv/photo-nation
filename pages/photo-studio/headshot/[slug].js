@@ -311,7 +311,7 @@ export default function Index() {
                   ))}
                 </div>
               </div>
-              <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 100</h3>
+              <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 50</h3>
               <div className="flex w-full items-center justify-center gap-4 mt-2 mb-6">
                 <button
                   disabled={selectedImages?.length == 0}

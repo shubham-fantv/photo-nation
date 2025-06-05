@@ -14,6 +14,9 @@ import AIAvatarSteps from "../../../src/component/HeadShot/AIAvatarSteps";
 import BadPhotos from "../../../src/component/HeadShot/BadPhotos";
 import GoodPhotos from "../../../src/component/HeadShot/GoodPhotos";
 import LoginAndSignup from "../../../src/component/feature/Login";
+import { Tooltip } from "@mui/material";
+import ToolTipText from "../../../src/component/common/ToolTipText";
+import { Box } from "@mui/system";
 
 const uploadedPhotos = [
   "https://assets.artistfirst.in/uploads/1747722518107-Urban_Sleek_Headshot_A1.jpg",
@@ -273,8 +276,20 @@ const Index = () => {
               <div className="flex flex-col items-center">
                 <div className=" w-full mx-auto py-2">
                   <div className="flex items-center justify-between mb-2">
-                    <h1 className="font-semibold text-[#1E1E1E]">
-                      Select upto {MAX_IMAGES} photos
+                    <h1 className="font-semibold flex text-[#1E1E1E]">
+                      Select upto {MAX_IMAGES} photos &nbsp;
+                      <Tooltip
+                        enterTouchDelay={0}
+                        leaveTouchDelay={6000}
+                        arrow
+                        title={
+                          <ToolTipText text="TLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled" />
+                        }
+                        placement="top-start"
+                        TransitionProps={{ leavedelay: 5000 }}
+                      >
+                        <Box mt={"-5px"} component="img" src="/images/icons/info-circle.svg" />
+                      </Tooltip>
                     </h1>
                     <span className="font-medium text-gray-600">
                       {imagePreviews.length}/{MAX_IMAGES}

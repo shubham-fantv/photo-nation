@@ -33,63 +33,6 @@ const index = (data) => {
   const [uploading, setUploading] = useState(false);
   const MAX_IMAGES = 12;
   const MAX_SIZE_MB = 5;
-  //  console.log("data",data);
-  const handleImageUpload = async (event) => {
-    const files = Array.from(event.target.files);
-
-    if (!files.length) return;
-    // Combine with existing and check total
-    const totalFiles = imagePreviews.length + files.length;
-    if (totalFiles > MAX_IMAGES) {
-      alert(`You can only upload up to ${MAX_IMAGES} images.`);
-      return;
-    }
-
-    setUploading(true);
-    try {
-      for (const file of files) {
-        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
-          alert(`"${file.name}" exceeds 2MB limit and was skipped.`);
-          continue;
-        }
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const response = await axios.post("https://upload.artistfirst.in/upload", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-
-        const uploadedUrl = response?.data?.data?.[0]?.url;
-
-        if (uploadedUrl) {
-          setImagePreviews((prev) => [
-            ...prev,
-            {
-              file,
-              url: uploadedUrl,
-              localPreview: URL.createObjectURL(file), // for display until uploaded image loads
-            },
-          ]);
-          setFiles((prev) => [...prev, uploadedUrl]); // ✅ Store uploaded URLs separately
-        }
-      }
-    } catch (error) {
-      console.error("Upload failed", error);
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const handleRemoveImage = (url) => {
-    setImagePreviews((prev) => prev.filter((img) => img.url !== url));
-    setFiles((prev) => prev.filter((f) => f !== url)); // ✅ Also remove from files
-  };
-
-  const handleImageChange = (e) => {
-    handleImageUpload(e);
-  };
-
   useEffect(() => {
     const pickRandomQuote = () => {
       const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -115,10 +58,6 @@ const index = (data) => {
     pose: "upper body",
   });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
   useQuery(
     `${FANTV_API_URL}/api/v1/ai-avatar`,
     () => fetcher.get(`${FANTV_API_URL}/api/v1/ai-avatar?limit=50`),
@@ -134,159 +73,10 @@ const index = (data) => {
     setMyAvatar(data || []);
   }, [data]);
 
-  const { mutate: generateAvatarApi } = useMutation(
-    (obj) => fetcher.post(`${API_BASE_URL}/api/v1/ai-avatar`, obj),
-    {
-      onSuccess: (response) => {
-        setPrompt("");
-        setLoading(false);
-        setSwalProps({
-          icon: "success",
-          show: true,
-          title: "Success",
-          text: "Avatar generation is completed",
-          showCancelButton: true,
-          confirmButtonText: "Ok",
-          cancelButtonText: "Cancel",
-          allowOutsideClick: false, // Optional: prevent dismiss by clicking outside
-          allowEscapeKey: false, // Optional: prevent ESC close
-        });
-      },
-      onError: (error) => {
-        setLoading(false);
-
-        const defaultMessage = "Something went wrong. Please try again later.";
-
-        const message = error?.response?.data?.message || error?.message || defaultMessage;
-
-        setSwalProps({
-          icon: "error",
-          show: true,
-          title: "Error",
-          text: message,
-          confirmButtonText: "OK",
-        });
-      },
-    }
-  );
-
   const handleConfirm = () => {
     router.push("/avatar-studio");
   };
 
-  const handleGenerateAvatar = (prompt, name, gender) => {
-    if (isLoggedIn) {
-      if (!prompt) {
-        alert("Please enter a prompt!");
-        return;
-      }
-
-      if (userData.credits <= 0) {
-        router.push("/subscription");
-        return;
-      }
-
-      const requestBody = {
-        prompt,
-        name: name,
-        gender: gender,
-        creditsUsed: 1,
-        aspectRatio: "1:1",
-        ...(image && { imageUrl: encodeURI(image) }), // ✅ encode URL with spaces
-      };
-      setLoading(true);
-
-      sendEvent({
-        event: "Generate Avatar",
-        email: userData?.email,
-        name: userData?.name,
-        prompt: prompt,
-        aspectRatio: "1:1",
-      });
-
-      generateAvatarApi(requestBody);
-    } else {
-      setIsPopupVisible(true);
-    }
-  };
-
-  const { mutate: generatePhotoAvatarApi } = useMutation(
-    (obj) => fetcher.post(`${API_BASE_URL}/api/v1/ai-avatar/photo-avatar`, obj),
-    {
-      onSuccess: (response) => {
-        setPrompt("");
-        setLoading(false);
-        setSwalProps({
-          icon: "success",
-          show: true,
-          title: "Success",
-          text: "Photo Avatar generation is completed",
-          showCancelButton: true,
-          confirmButtonText: "Ok",
-          cancelButtonText: "Cancel",
-          allowOutsideClick: false, // Optional: prevent dismiss by clicking outside
-          allowEscapeKey: false, // Optional: prevent ESC close
-        });
-      },
-      onError: (error) => {
-        setLoading(false);
-
-        const defaultMessage = "Something went wrong. Please try again later.";
-
-        const message = error?.response?.data?.message || error?.message || defaultMessage;
-
-        setSwalProps({
-          icon: "error",
-          show: true,
-          title: "Error",
-          text: message,
-          confirmButtonText: "OK",
-        });
-      },
-    }
-  );
-
-  const handleGeneratePhotoAvatar = () => {
-    if (isLoggedIn) {
-      let nameInput = name;
-
-      if (!nameInput.trim()) {
-        nameInput = typeof window !== "undefined" ? window.prompt("Enter avatar name:") : null;
-        if (!nameInput || !nameInput.trim()) {
-          alert("Upload cancelled. Name is required.");
-          return;
-        }
-      }
-
-      if (userData.credits <= 0) {
-        router.push("/subscription");
-        return;
-      }
-
-      const requestBody = {
-        prompt: "Give a upper body image of the person",
-        name: nameInput,
-        gender: "female",
-        creditsUsed: 10,
-        aspectRatio: "1:1",
-        ...(image && { imageUrl: image }), // ✅ only include if `image` is truthy
-        imageInput: files ? files : [],
-      };
-      setLoading(true);
-
-      sendEvent({
-        event: "Generate Photo Avatar",
-        email: userData?.email,
-        name: userData?.name,
-        prompt: prompt,
-        aspectRatio: "1:1",
-      });
-
-      generatePhotoAvatarApi(requestBody);
-    } else {
-      setIsPopupVisible(true);
-    }
-  };
   const handleRedirect = (item) => {
     if (item?.type == "headshot") {
       router.push(`/photo-studio/headshot/${item?._id}`);
@@ -336,7 +126,7 @@ const index = (data) => {
               <button className="text-left">
                 <div className="flex items-center gap-2 text-[#0EA5E9]">
                   <span className="font-semibold text-lg sm:text-xl text-[#0369A1]">
-                    Luxuryshot Photo Studio
+                    Luxury Photo Studio
                   </span>
                 </div>
               </button>
@@ -348,11 +138,10 @@ const index = (data) => {
             </div>
 
             <button className="bg-[#C2D8E7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto">
-              Create Luxuryshot
+              Create Luxury Photos
             </button>
           </div>
 
-          {/* Headshot Studio Card */}
           <div
             onClick={() => handleNavigation("/photo-studio/headshot")}
             className="flex flex-col cursor-pointer justify-between items-start p-4 sm:p-6 bg-[#F5F3FF] border border-[#A78BFA] rounded-xl hover:bg-[#EDE9FE] transition"
@@ -374,7 +163,7 @@ const index = (data) => {
               <button className="text-left">
                 <div className="flex items-center gap-2 text-[#7C3AED]">
                   <span className="font-semibold text-lg sm:text-xl text-[#4C1D95]">
-                    Headshot Photo Studio
+                    Professional (Headshot) Photo Studio
                   </span>
                 </div>
               </button>
@@ -386,7 +175,7 @@ const index = (data) => {
             </div>
 
             <button className="bg-[#D1CDE7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto">
-              Create Headshot
+              Create Headshots
             </button>
           </div>
         </div>
