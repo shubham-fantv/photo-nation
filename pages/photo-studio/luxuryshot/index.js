@@ -17,6 +17,7 @@ import LoginAndSignup from "../../../src/component/feature/Login";
 import { Tooltip } from "@mui/material";
 import ToolTipText from "../../../src/component/common/ToolTipText";
 import { Box } from "@mui/system";
+import useGTM from "../../../src/hooks/useGTM";
 
 const uploadedPhotos = [
   "https://assets.artistfirst.in/uploads/1747830353356-Grand_Foyer_LuxuryShot_A1.jpg",
@@ -39,7 +40,7 @@ const aiGeneratedImages = [
 const Index = () => {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
-
+  const { sendGTM, sendEvent } = useGTM();
   const [swalProps, setSwalProps] = useState({});
   const { isLoggedIn, userData } = useSelector((state) => state.user);
   const [subTitle, setSubTitle] = useState("");
@@ -169,6 +170,7 @@ const Index = () => {
     {
       onSuccess: (response) => {
         setLoading(false);
+        sendGTM({ event: "luxuryshotGeneraedPN" });
         router.push(`/photo-studio/luxuryshot/${response?.data._id}`, undefined, { scroll: false });
       },
       onError: (error) => {

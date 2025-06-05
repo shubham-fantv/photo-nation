@@ -46,8 +46,8 @@ function MyApp({ Component, pageProps, emotionCache = createEmotionCache() }) {
     initMixpanel();
 
     const handleRouteChange = (url) => {
-      sendPageView(url); // fire GTM event
-      trackEvent("page_view", { page: url });
+      sendPageView(url);
+      trackEvent("pageViewedPN", { page: url });
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     // Fire on first load

@@ -11,6 +11,7 @@ import { API_BASE_URL, FANTV_API_URL } from "../../src/constant/constants";
 import fetcher from "../../src/dataProvider";
 import useGTM from "../../src/hooks/useGTM";
 import { quotes } from "../../src/utils/common";
+import { event } from "../../src/lib/gtm";
 const index = (data) => {
   console.log("🚀 ~ index ~ data:", data);
   const [avatarData, setAvatarData] = useState([]);
@@ -20,7 +21,7 @@ const index = (data) => {
   const [image, setImage] = useState("");
   const [imagePreviews, setImagePreviews] = useState([]);
   const [myAvatar, setMyAvatar] = useState(data);
-  const { sendEvent } = useGTM();
+  const { sendEvent, sendGTM } = useGTM();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [subTitle, setSubTitle] = useState("");
   const [files, setFiles] = useState([]);
@@ -85,8 +86,49 @@ const index = (data) => {
     }
   };
 
-  const handleNavigation = (path) => {
-    router.push(path);
+  const handleNavigation = (type) => {
+    if (type == "luxuryshot") {
+      sendEvent({
+        event: "card_clicked",
+        card_title: "LuxuryShot",
+        card_id: "category_luxuryshot_card",
+        page_name: "Photo Studio",
+      });
+    } else {
+      sendEvent({
+        event: "card_clicked",
+        card_title: "Headshot",
+        card_id: "category_headshot_card",
+        page_name: "Photo Studio",
+      });
+    }
+    router.push(`/photo-studio/${type}`);
+  };
+  const handleHeadShotButton = (e) => {
+    e.stopPropagation();
+    sendGTM({ event: "createHeadshotButtonPN" });
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Create Headshot",
+      interaction_type: "Standard Button",
+      button_id: "ps_cat_headshot_btn",
+      page_name: "Photo Studio",
+    });
+
+    router.push("/photo-studio/headshot");
+  };
+
+  const handleLuxuryShotButton = (e) => {
+    e.stopPropagation();
+    sendGTM({ event: "createLuxuryButtonPN" });
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Create Luxuryshot",
+      interaction_type: "Standard Button",
+      button_id: "ps_cat_luxuryshot_btn",
+      page_name: "Photo Studio",
+    });
+    router.push("/photo-studio/luxuryshot");
   };
 
   return (
@@ -106,7 +148,7 @@ const index = (data) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
           {/* Luxuryshot Studio Card */}
           <div
-            onClick={() => handleNavigation("/photo-studio/luxuryshot")}
+            onClick={() => handleNavigation("luxuryshot")}
             className="flex flex-col justify-between items-start p-4 sm:p-6 bg-[#F0F9FF] border border-[#7DD3FC] rounded-xl hover:bg-[#E0F2FE] transition cursor-pointer"
           >
             {/* Images Section */}
@@ -137,13 +179,16 @@ const index = (data) => {
               </p>
             </div>
 
-            <button className="bg-[#C2D8E7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto">
+            <button
+              onClick={(e) => handleLuxuryShotButton(e)}
+              className="bg-[#C2D8E7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto"
+            >
               Create Luxury Photos
             </button>
           </div>
 
           <div
-            onClick={() => handleNavigation("/photo-studio/headshot")}
+            onClick={() => handleNavigation("headshot")}
             className="flex flex-col cursor-pointer justify-between items-start p-4 sm:p-6 bg-[#F5F3FF] border border-[#A78BFA] rounded-xl hover:bg-[#EDE9FE] transition"
           >
             {/* Images Section */}
@@ -174,7 +219,10 @@ const index = (data) => {
               </p>
             </div>
 
-            <button className="bg-[#D1CDE7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto">
+            <button
+              onClick={(e) => handleHeadShotButton(e)}
+              className="bg-[#D1CDE7] px-4 sm:px-5 py-2 sm:py-3 rounded-full mt-4 font-semibold text-sm sm:text-base w-full sm:w-auto"
+            >
               Create Headshots
             </button>
           </div>

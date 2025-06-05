@@ -17,6 +17,8 @@ import LoginAndSignup from "../../../src/component/feature/Login";
 import { Tooltip } from "@mui/material";
 import ToolTipText from "../../../src/component/common/ToolTipText";
 import { Box } from "@mui/system";
+import useGTM from "../../../src/hooks/useGTM";
+import CustomTooltip from "../../../src/component/common/CustomTooltip";
 
 const uploadedPhotos = [
   "https://assets.artistfirst.in/uploads/1747722518107-Urban_Sleek_Headshot_A1.jpg",
@@ -39,7 +41,7 @@ const aiGeneratedImages = [
 const Index = () => {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
-
+  const { sendGTM, sendEvent } = useGTM();
   const [swalProps, setSwalProps] = useState({});
   const { isLoggedIn, userData } = useSelector((state) => state.user);
   const [subTitle, setSubTitle] = useState("");
@@ -169,6 +171,7 @@ const Index = () => {
     {
       onSuccess: (response) => {
         setLoading(false);
+        sendGTM({ event: "headshotGeneratedPN" });
         router.push(`/photo-studio/headshot/${response?.data._id}`, undefined, { scroll: false });
       },
       onError: (error) => {
@@ -278,18 +281,15 @@ const Index = () => {
                   <div className="flex items-center justify-between mb-2">
                     <h1 className="font-semibold flex text-[#1E1E1E]">
                       Select upto {MAX_IMAGES} photos &nbsp;
-                      <Tooltip
-                        enterTouchDelay={0}
-                        leaveTouchDelay={6000}
-                        arrow
-                        title={
-                          <ToolTipText text="TLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled" />
-                        }
-                        placement="top-start"
-                        TransitionProps={{ leavedelay: 5000 }}
-                      >
-                        <Box mt={"-5px"} component="img" src="/images/icons/info-circle.svg" />
-                      </Tooltip>
+                      <CustomTooltip title="Please select at least 4 photos to see headshot categories and styles">
+                        <Box
+                          mt="-5px"
+                          component="img"
+                          src="/images/icons/info-circle.svg"
+                          alt="Info"
+                          sx={{ width: 20, height: 20, cursor: "pointer" }}
+                        />
+                      </CustomTooltip>
                     </h1>
                     <span className="font-medium text-gray-600">
                       {imagePreviews.length}/{MAX_IMAGES}
@@ -359,7 +359,18 @@ const Index = () => {
             </div>
           </div>
           <div className=" relative max-w-xl mx-auto pt-3 ">
-            <h2 className="text-sm font-medium mb-3">Select Headshot Style</h2>
+            <h2 className="text-sm flex font-medium mb-3">
+              Select Headshot Style &nbsp;
+              <CustomTooltip title="Select atleast one of the styles to continue">
+                <Box
+                  mt="-5px"
+                  component="img"
+                  src="/images/icons/info-circle.svg"
+                  alt="Info"
+                  sx={{ width: 20, height: 20, cursor: "pointer" }}
+                />
+              </CustomTooltip>
+            </h2>
             {imagePreviews.length < 4 && (
               <div class="absolute inset-0 bg-black/5 backdrop-blur-xs z-10 rounded"></div>
             )}

@@ -7,7 +7,7 @@ import useGTM from "../../src/hooks/useGTM";
 const index = () => {
   const router = useRouter();
   const { userData } = useSelector((state) => state.user);
-  const { sendEvent } = useGTM();
+  const { sendEvent, sendGTM } = useGTM();
 
   const checkToken = async (token) => {
     let data = await fetcher.get(`verify-payment?session_id=${token}`);
@@ -18,6 +18,7 @@ const index = () => {
         email: userData?.email,
         name: userData?.name,
       });
+      sendGTM({ event: "paymentSuccessfulPN" });
     } else {
     }
   };

@@ -11,7 +11,7 @@ import useGTM from "../../../hooks/useGTM";
 
 const LoginAndSignup = ({ open, handleModalClose }) => {
   const dispatch = useDispatch();
-  const { sendEvent } = useGTM();
+  const { sendEvent, sendGTM } = useGTM();
   const { mutate: loginGoogleApi } = useMutation(
     (obj) => fetcher.post(`${API_BASE_URL}/api/v1/auth/login-google`, obj),
     {
@@ -31,6 +31,7 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
           name: res?.data?.user?.name,
           signup_method: "Google",
         });
+        sendGTM({ event: "signupSuccessfulPN" });
         handleModalClose();
       },
       onError: (error) => {

@@ -89,7 +89,7 @@ const Index = () => {
     login: false,
   });
 
-  const { sendEvent } = useGTM();
+  const { sendEvent, sendGTM } = useGTM();
 
   const router = useRouter();
   const handleLoginPopupClose = () => {
@@ -138,6 +138,8 @@ const Index = () => {
       button_id: "hdr_lp_primary_cta_btn",
       page_name: "Landing Page",
     });
+    sendGTM({ event: "landingPagePriamryCTAPN" });
+
     router.push("/photo-studio");
   };
   const handleNavigationLaunch = () => {

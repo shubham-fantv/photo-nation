@@ -4,6 +4,9 @@ const useGTM = () => {
   const sendEvent = (data) => {
     gtm.event(data);
   };
+  const sendGTM = (data) => {
+    gtm.GTMevent(data);
+  };
 
   const sendPageView = (url) => {
     gtm.pageview(url);
@@ -11,6 +14,7 @@ const useGTM = () => {
 
   return {
     sendEvent,
+    sendGTM,
     sendPageView,
   };
 };
