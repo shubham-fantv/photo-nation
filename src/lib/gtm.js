@@ -1,6 +1,6 @@
 import { trackEvent } from "../../mixpanelClient";
 // lib/gtm.js
-export const GTM_ID = "GTM-PJRMHNSR";
+export const GTM_ID = "GTM-M66VXNTL";
 
 export const pageview = (url) => {
   window.dataLayer?.push({
