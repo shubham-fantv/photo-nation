@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { ChevronDown, LogOut, User, Mail } from "lucide-react";
 import { useSelector } from "react-redux";
 import logout from "../../utils/logout";
+import useGTM from "../../hooks/useGTM";
 
 const UserProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { sendGTM } = useGTM();
   const { userData } = useSelector((state) => state.user);
 
   const toggleDropdown = () => {
@@ -56,6 +58,7 @@ const UserProfileDropdown = () => {
               <hr className="my-1 border-gray-200" />
 
               <a
+                onClick={() => sendGTM({ event: "manageSubscriptionPN" })}
                 href="/subscription"
                 className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >

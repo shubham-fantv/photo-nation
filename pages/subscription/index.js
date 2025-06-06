@@ -10,7 +10,7 @@ const PricingPlans = () => {
   const [subscriptions, setSubscriptions] = useState([]);
 
   const { userData, isLoggedIn } = useSelector((state) => state.user);
-  const { sendEvent } = useGTM();
+  const { sendEvent, sendGTM } = useGTM();
   const [billingCycle, setBillingCycle] = useState("monthly");
 
   const filteredPlans = subscriptions?.filter((plan) => plan.billedType === billingCycle);
@@ -114,6 +114,7 @@ const PricingPlans = () => {
       plan_type: plan?.planName,
       plan_duration: plan?.billedType,
     });
+    sendGTM({ event: "subscriptionInitiatedPN" });
     if (isLoggedIn) {
       initiatePayment(requestBody);
     } else {
