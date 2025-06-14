@@ -205,7 +205,9 @@ export default function Index() {
                 <div className="space-y-5 ">
                   <h1 className="text-base font-medium text-gray-900">
                     Hang tight! Just{" "}
-                    <span className="text-blue-500 text-xl font-semibold">{timeLeft} minutes</span>{" "}
+                    <span className="text-blue-500 text-xl font-semibold">
+                      {timeLeft} minutes
+                    </span>{" "}
                     left to bring your image to life.
                   </h1>
                   <p className=" text-sm text-gray-600 text-sm">
@@ -249,12 +251,16 @@ export default function Index() {
                         alt={`${img?.category} style`}
                         className="w-20 h-20 object-cover rounded-lg"
                       />
-                      <span className="text-xs text-center mt-1 w-20 truncate">{img?.name}</span>
+                      <span className="text-xs text-center mt-1 w-20 truncate">
+                        {img?.name}
+                      </span>
                     </div>
                   ))}
                 </div>
 
-                <h2 className="text-sm font-medium mb-3">Select Headshot Style</h2>
+                <h2 className="text-sm font-medium mb-3">
+                  Select Headshot Style
+                </h2>
                 <div className="flex gap-1 overflow-x-auto mb-4">
                   {mainImages.map((img, idx) => (
                     <div
@@ -271,16 +277,23 @@ export default function Index() {
                         alt={`${img.category} style`}
                         className="w-20 h-20 object-cover rounded-lg"
                       />
-                      <span className="text-xs text-[#626262] mt-1">{img.category}</span>
+                      <span className="text-xs text-[#626262] mt-1">
+                        {img.category}
+                      </span>
                     </div>
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-4 bg-gray-50 p-4 rounded-xl mb-6">
                   {relatedImages.map((img, idx) => (
-                    <div key={img._id} onClick={() => toggleImageSelection(img)}>
+                    <div
+                      key={img._id}
+                      onClick={() => toggleImageSelection(img)}
+                    >
                       <div
                         className={`cursor-pointer border-2 rounded-lg overflow-hidden transition relative ${
-                          isImageSelected(img) ? "border-purple-500" : "border-transparent"
+                          isImageSelected(img)
+                            ? "border-purple-500"
+                            : "border-transparent"
                         }`}
                       >
                         <img
@@ -311,7 +324,9 @@ export default function Index() {
                   ))}
                 </div>
               </div>
-              <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">Credits : 50</h3>
+              <h3 className="mb-6 text-sm text-[#1E1E1EB2] text-normal">
+                Credits : 50
+              </h3>
               <div className="flex w-full items-center justify-center gap-4 mt-2 mb-6">
                 <button
                   disabled={selectedImages?.length == 0}
@@ -328,7 +343,9 @@ export default function Index() {
             <div className="min-h-screen  w-full ">
               <div className="w-full  mx-auto">
                 <div className="bg-[#F6F4FF] rounded-2xl border border-[#E4DDFF] p-8 relative overflow-hidden">
-                  <h2 className="text-2xl text-center mb-3 font-semibold">{data?.name}</h2>
+                  <h2 className="text-2xl text-center mb-3 font-semibold">
+                    {data?.name}
+                  </h2>
                   <div className="flex justify-center ">
                     <div className="relative">
                       <div className="w-80 h-80 rounded-3xl overflow-hidden border-4  shadow-2xl ">
@@ -350,13 +367,18 @@ export default function Index() {
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">
                       {selectedImage?.style}
                     </h2>
-                    <p className="text-gray-600">{selectedImage?.description}</p>
+                    <p className="text-gray-600">
+                      {selectedImage?.description}
+                    </p>
                   </div>
 
                   <div className="bg-[#E8E6F5] rounded-2xl p-3 sm:p-4 lg:p-6">
                     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3 lg:gap-1">
                       {data?.images?.map((image, index) => (
-                        <div key={image.id} className="flex flex-col items-center">
+                        <div
+                          key={image.id}
+                          className="flex flex-col items-center"
+                        >
                           <div
                             className={`w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg ${
                               selectedImage?._id === image?._id
