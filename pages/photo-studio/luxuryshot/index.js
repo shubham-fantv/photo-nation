@@ -32,10 +32,10 @@ const aiGeneratedImages = [
   "https://assets.artistfirst.in/uploads/1747830214895-Star_Dining_LuxuryShot_A1.jpg",
   "https://assets.artistfirst.in/uploads/1747830089346-Altitude_Cabin_LuxuryShot_A1.jpg",
   "https://assets.artistfirst.in/uploads/1747830353356-Grand_Foyer_LuxuryShot_A1.jpg",
-  "https://assets.artistfirst.in/uploads/1747830666578-Classic_Car_Rally_LuxuryShot_A1.jpg",
-  "https://assets.artistfirst.in/uploads/1747830613767-Heli_Ski_Peak_LuxuryShot_A1.jpg",
-  "https://assets.artistfirst.in/uploads/1747830686432-Art_Auction_LuxuryShot_A1.jpg",
-  "https://assets.artistfirst.in/uploads/1747830292359-Musseum_Gala_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1747830337257-Forest_GT_LuxuryShot_A1.jpg",
+  "https://assets.artistfirst.in/uploads/1749402340738-Luxury_Cave_Dinner_comp.jpg",
+  "https://assets.artistfirst.in/uploads/1749402431972-Luxury_Effiel_Tower_comp.jpg",
+  "https://assets.artistfirst.in/uploads/1749402472674-Luxury_Garage_comp.jpg",
 ];
 
 const Index = () => {
@@ -105,7 +105,9 @@ const Index = () => {
     {
       refetchOnMount: "always",
       onSuccess: ({ data }) => {
-        setHeadShotStyleData(data.filter((item) => item.category !== "Estates"));
+        setHeadShotStyleData(
+          data.filter((item) => item.category !== "Estates")
+        );
       },
     }
   );
@@ -132,9 +134,13 @@ const Index = () => {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await axios.post("https://upload.artistfirst.in/upload", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        const response = await axios.post(
+          "https://upload.artistfirst.in/upload",
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
 
         const uploadedUrl = response?.data?.data?.[0]?.url;
 
@@ -172,12 +178,17 @@ const Index = () => {
       onSuccess: (response) => {
         setLoading(false);
         sendGTM({ event: "luxuryshotGeneraedPN" });
-        router.push(`/photo-studio/luxuryshot/${response?.data._id}`, undefined, { scroll: false });
+        router.push(
+          `/photo-studio/luxuryshot/${response?.data._id}`,
+          undefined,
+          { scroll: false }
+        );
       },
       onError: (error) => {
         setLoading(false);
         const defaultMessage = "Something went wrong. Please try again later.";
-        const message = error?.response?.data?.message || error?.message || defaultMessage;
+        const message =
+          error?.response?.data?.message || error?.message || defaultMessage;
         setSwalProps({
           icon: "error",
           show: true,
@@ -283,7 +294,7 @@ const Index = () => {
                   <div className="flex items-center justify-between mb-2">
                     <h1 className="font-semibold flex text-[#1E1E1E]">
                       Select upto {MAX_IMAGES} photos &nbsp;
-                      <CustomTooltip title="Please select at least 4 photos to see headshot categories and styles">
+                      <CustomTooltip title="Please select at least 4 photos to see luxuryshot categories and styles">
                         <Box
                           mt="-5px"
                           component="img"
