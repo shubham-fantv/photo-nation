@@ -16,7 +16,12 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
     (obj) => fetcher.post(`${API_BASE_URL}/api/v1/auth/login-google`, obj),
     {
       onSuccess: (res) => {
-        loginData(res.data.token, res.data.user.name, res.data.user.email, res.data.user.id);
+        loginData(
+          res.data.token,
+          res.data.user.name,
+          res.data.user.email,
+          res.data.user.id
+        );
         dispatch(setUserData(res?.data?.user));
         dispatch(
           setToken({
@@ -65,7 +70,19 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
         onClose={handleModalClose}
         closeAfterTransition
       >
-        <Box sx={styles.wrapper}>
+        <Box
+          sx={{
+            ...styles.wrapper,
+            background: "white",
+            borderRadius: "20px",
+            padding: "32px",
+            position: "relative",
+            maxWidth: "400px",
+            margin: "auto",
+            overflow: "hidden",
+          }}
+        >
+          {/* Close Button */}
           <Box
             sx={{
               cursor: "pointer",
@@ -74,15 +91,41 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
               position: "absolute",
               right: "5px",
               top: "5px",
-              height: "20px",
-              width: "20px",
+              height: "32px",
+              width: "32px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
             }}
-            component="img"
-            src="/images/close.svg"
             onClick={handleModalClose}
-            className="text-white"
-          />
-          <div className="justify-center flex">
+          >
+            <img src="/images/close.svg" alt="Close" className="h-4 w-4" />
+          </Box>
+
+          {/* Top Before/After */}
+          <div className="flex justify-center items-center mb-8 space-x-8">
+            <div className="text-center">
+              <img
+                src="/images/before1.svg"
+                alt="Before 1"
+                className="transform -rotate-6 w-64 h-93 object-cover"
+              />
+            </div>
+
+            <img src="/images/arrow.svg" alt="Arrow" className="w-12 h-12" />
+
+            <div className="text-center">
+              <img
+                src="/images/after1.svg"
+                alt="After 1"
+                className="transform -rotate-[10deg] w-64 h-93 object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Logo */}
+          <div className="justify-center flex mb-4">
             <img
               src={"/images/logo-white.svg"}
               alt="VideoNation Logo"
@@ -91,20 +134,38 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
               decoding="async"
             />
           </div>
-          <p className="text-white text-center text-2xl font-semibold  mt-6 ">
-            Welcome to PhotoNation{" "}
+
+          {/* Heading */}
+          <p className="text-black text-center text-2xl font-semibold mb-6">
+            Welcome to PhotoNation
           </p>
-          <button style={styles.googleButton} onClick={() => handleLoginClick()}>
-            <div className="text-white flex align-center justify-center">
-              <span className="h-6 w-6">
-                <img className="h-6 w-6" src="/images/icons/google.svg" />{" "}
-              </span>{" "}
-              &nbsp;
+
+          {/* Google Login */}
+          <button
+            style={{
+              background: "#f1f1f1",
+              borderRadius: "999px",
+              padding: "12px 20px",
+              width: "100%",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+            }}
+            onClick={() => handleLoginClick()}
+          >
+            <div className="flex items-center justify-center text-black font-medium">
+              <span className="h-6 w-6 mr-3">
+                <img
+                  className="h-6 w-6"
+                  src="/images/icons/google.svg"
+                  alt="Google"
+                />
+              </span>
               <span>Sign in with Google</span>
             </div>
           </button>
-          <div>
-            <span className="text-white text-sm">
+
+          {/* Terms */}
+          <div className="mt-4 text-center">
+            <span className="text-gray-600 text-sm">
               By signing up, you agree to our{" "}
               <a href="/terms" target="_blank" className="text-[#FFA0FF]">
                 Terms
@@ -114,6 +175,26 @@ const LoginAndSignup = ({ open, handleModalClose }) => {
                 Privacy Policy
               </a>
             </span>
+          </div>
+
+          {/* Bottom Before/After */}
+          <div className="flex justify-center items-center mt-8 space-x-8">
+            <div className="text-center">
+              <img
+                src="/images/before2.svg"
+                alt="Before 2"
+                className="transform -rotate-6 w-64 h-93 object-cover"
+              />
+            </div>
+
+            <img src="/images/arrow2.svg" alt="Arrow" className="w-12 h-12" />
+            <div className="text-center">
+              <img
+                src="/images/after2.svg"
+                alt="After 2"
+                className="transform rotate-6 w-64 h-93 object-cover"
+              />
+            </div>
           </div>
         </Box>
       </Modal>

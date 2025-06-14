@@ -30,7 +30,8 @@ const index = (data) => {
   const [swalProps, setSwalProps] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [isPromptModalVisible, setIsPromptModalVisible] = useState(false);
-  const [isPromptPhotoModalVisible, setIsPromptPhotoModalVisible] = useState(false);
+  const [isPromptPhotoModalVisible, setIsPromptPhotoModalVisible] =
+    useState(false);
   const [uploading, setUploading] = useState(false);
   const MAX_IMAGES = 12;
   const MAX_SIZE_MB = 5;
@@ -140,7 +141,8 @@ const index = (data) => {
           Your AI-Powered Photography Studio
         </h1>
         <p className="text-[#1E1E1EB2] text-sm sm:text-base lg:text-[16px] mt-2 font-semibold text-center px-4 max-w-4xl mx-auto">
-          From LinkedIn ready headshots to high fashion editorials create pro visuals in seconds
+          From LinkedIn ready headshots to high fashion editorials create pro
+          visuals in seconds
         </p>
       </div>
 
@@ -154,11 +156,11 @@ const index = (data) => {
             {/* Images Section */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-8 relative w-full">
               <img
-                src="https://assets.artistfirst.in/uploads/1747489542488-Ai_Avatar_Icon_1.png"
+                src="https://assets.artistfirst.in/uploads/1747830071046-Arrival_Luxe_LuxuryShot_A1.jpg"
                 className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
               <img
-                src="https://assets.artistfirst.in/uploads/1747489568650-AI_Avatar_Icon_2.jpg"
+                src="https://assets.artistfirst.in/uploads/1747830106502-Jet_Celebration_LuxuryShot_A1.jpg"
                 className="hidden md:block w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
             </div>
@@ -173,9 +175,10 @@ const index = (data) => {
                 </div>
               </button>
               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                Immerse yourself in breathtaking visuals with Luxuryshot Photo Studio. Simply choose
-                from our curated collection of stunning luxury styles, and our advanced AI will
-                instantly transform your photos into bespoke, high-fashion scenes
+                Immerse yourself in breathtaking visuals with Luxuryshot Photo
+                Studio. Simply choose from our curated collection of stunning
+                luxury styles, and our advanced AI will instantly transform your
+                photos into bespoke, high-fashion scenes
               </p>
             </div>
 
@@ -213,9 +216,9 @@ const index = (data) => {
                 </div>
               </button>
               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                Transform your photos into professional Headshots with Headshot Photo Studio. Use
-                your favorite existing images to instantly create a diverse collection of
-                high-quality headshots
+                Transform your photos into professional Headshots with Headshot
+                Photo Studio. Use your favorite existing images to instantly
+                create a diverse collection of high-quality headshots
               </p>
             </div>
 
@@ -232,7 +235,9 @@ const index = (data) => {
         {myAvatar?.data?.length > 0 && (
           <div className="flex justify-between items-center mt-6 sm:mt-8 px-2 sm:px-0">
             <div>
-              <p className="font-semibold text-xl sm:text-2xl text-[#1E1E1E]">My Avatars</p>
+              <p className="font-semibold text-xl sm:text-2xl text-[#1E1E1E]">
+                My Avatars
+              </p>
             </div>
           </div>
         )}
