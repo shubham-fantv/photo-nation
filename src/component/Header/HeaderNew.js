@@ -76,7 +76,7 @@ const HeaderNew = ({ app }) => {
 
     if (userData?.credits < 10 && !hasShownModal) {
       setSwalProps({
-        show: true,
+        show: false,
         title: "⏳ You're almost out of credits!",
         text: "Upgrade now to unlock HD, pro voices, and longer videos.",
         confirmButtonText: "View Plans",
