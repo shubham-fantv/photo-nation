@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import fetcher from "../../src/dataProvider";
+import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import useGTM from "../../src/hooks/useGTM";
@@ -9,16 +10,38 @@ const index = () => {
   const { userData } = useSelector((state) => state.user);
   const { sendEvent, sendGTM } = useGTM();
 
+  const { refetch } = useQuery(
+    `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`,
+    () =>
+      fetcher.get(
+        `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`
+      ),
+    {
+      enabled: !!(userData?._id || userData?.id),
+      refetchOnMount: "always",
+      onSuccess: ({ data }) => {
+        dispatch(setUserData(data));
+      },
+    }
+  );
+
   const checkToken = async (token) => {
     let data = await fetcher.get(`verify-payment?session_id=${token}`);
 
-    if (data.status == 204) {
-      sendEvent({
-        event: "Subscribe",
+    if (data?.success) {
+      refetch();
+      sendGTM({
+        event: "paymentSuccessfulPN",
         email: userData?.email,
         name: userData?.name,
       });
-      sendGTM({ event: "paymentSuccessfulPN" });
+      sendEvent({
+        event: "subscription_activated",
+        trial_start_timestamp: data?.session?.created,
+        plan_price: data?.session?.amount_total,
+        payment_type: data?.session?.payment_method_types,
+        trial_start_date: getDateTimeFromTimestamp(data?.session?.created),
+      });
     } else {
     }
   };
