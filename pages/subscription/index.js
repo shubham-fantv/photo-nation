@@ -296,7 +296,7 @@ const PricingPlans = () => {
                 )}
 
                 <ul className="space-y-2">
-                  {plan?.benefits?.map((feature, featureIndex) => (
+                  {plan?.benefits_pn?.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start">
                       <span className="mr-2">•</span>
                       <span>{feature}</span>
