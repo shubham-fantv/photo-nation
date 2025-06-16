@@ -13,7 +13,7 @@ const PricingPlans = () => {
   const { sendEvent, sendGTM } = useGTM();
   const [billingCycle, setBillingCycle] = useState("monthly");
 
-  const filteredPlans = subscriptions?.filter((plan) => plan.billedType === billingCycle);
+  const filteredPlans = subscriptions?.filter((plan) => plan?.billedType === billingCycle);
 
   const [userSubscriptionData, setUserSubscriptionData] = useState([]);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
@@ -106,7 +106,7 @@ const PricingPlans = () => {
     // }
 
     const requestBody = {
-      subscriptionPlanId: plan._id,
+      subscriptionPlanId: plan?._id,
       ...(promoCode && promoCode !== "" && { promoCode }),
     };
     sendEvent({
@@ -179,7 +179,7 @@ const PricingPlans = () => {
       </div>
       <div className="relative w-full px-4">
         {/* Optional: Display badge only if at least one plan is highlighted */}
-        {filteredPlans.findIndex((plan) => plan.isHighlighted) >= 0 && (
+        {filteredPlans.findIndex((plan) => plan?.isHighlighted) >= 0 && (
           <div
             className="absolute z-10"
             style={{ top: "-25px", left: "50%", transform: "translateX(-135px)" }}
@@ -188,17 +188,21 @@ const PricingPlans = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 ${
+            userData?.isFreeTrial || userData?.isFreeTrialUsed ? "lg:grid-cols-4" : "lg:grid-cols-3"
+          } gap-8`}
+        >
           {filteredPlans?.map((plan, index) => {
             const isCurrentPlan =
-              !!userSubscriptionData && userSubscriptionData.subscriptionPlanId?._id === plan._id;
+              !!userSubscriptionData && userSubscriptionData.subscriptionPlanId?._id === plan?._id;
 
             let isUpgrade = false;
             let isDowngrade = false;
 
             if (!userData?.isTrialUser && userSubscriptionData?.subscriptionPlanId) {
-              isUpgrade = plan.planNumber > currentPlanPriority;
-              isDowngrade = plan.planNumber < currentPlanPriority;
+              isUpgrade = plan?.planNumber > currentPlanPriority;
+              isDowngrade = plan?.planNumber < currentPlanPriority;
             }
 
             return (
@@ -207,7 +211,7 @@ const PricingPlans = () => {
                 className={`rounded-lg p-8 flex flex-col relative transition-all ${
                   isCurrentPlan
                     ? "bg-green-100 text-black border-2 border-green-200 shadow-xl" // ✅ light green
-                    : plan.isHighlighted
+                    : plan?.isHighlighted
                     ? "bg-blue-100 text-black border-2 border-blue-200 shadow-xl" // ✅ light green
                     : "bg-[#F5F5F5] text-black border border-gray-400 shadow-xl" // ✅ medium gray
                 }`}
@@ -219,13 +223,13 @@ const PricingPlans = () => {
                   </div>
                 )}
                 {/* Optional “Most Popular” badge */}
-                {plan.isHighlighted && (
+                {plan?.isHighlighted && (
                   <div className="absolute top-[-15px] right-[-10px] bg-amber-400 text-black text-xs font-bold px-2 py-1 rounded shadow-md">
                     Most Popular
                   </div>
                 )}
 
-                <h2 className="text-2xl font-bold mb-2">{plan.planName}</h2>
+                <h2 className="text-2xl font-bold mb-2">{plan?.planName}</h2>
 
                 <div className="mb-8">
                   <span>
@@ -234,23 +238,27 @@ const PricingPlans = () => {
                       <>
                         <span className="text-2xl font-bold">
                           {isNewCustomer
-                            ? ((plan.cost * discount) / 12).toFixed(2)
-                            : (plan.cost / 12).toFixed(2)}
+                            ? ((plan?.cost * discount) / 12).toFixed(2)
+                            : (plan?.cost / 12).toFixed(2)}
                           /month
                         </span>
-                        <span className="text-gray-500 text-sm ml-2">
-                          (<s>${plan.actual_cost.toFixed(2)}</s>)
-                        </span>
+                        {!plan.isTrialPlan && (
+                          <span className="text-gray-500 text-sm ml-2">
+                            (<s>${plan?.actual_cost?.toFixed(2)}</s>)
+                          </span>
+                        )}
                       </>
                     ) : (
                       <>
                         <span className="text-2xl font-bold">
-                          {isNewCustomer ? (plan.cost * discount).toFixed(2) : plan.cost.toFixed(2)}
+                          {isNewCustomer
+                            ? (plan?.cost * discount).toFixed(2)
+                            : plan?.cost?.toFixed(2)}
                           /month
                         </span>
                         {isNewCustomer && (
                           <span className="text-sm text-gray-500 ml-2">
-                            <s>(${plan.cost.toFixed(2)})</s>
+                            <s>(${plan?.cost?.toFixed(2)})</s>
                           </span>
                         )}
                       </>
@@ -264,8 +272,8 @@ const PricingPlans = () => {
                     </div>
                   )}
 
-                  {plan.billedType && (
-                    <p className="text-sm text-gray-700 mt-2">Billed {plan.billedType}</p>
+                  {plan?.billedType && (
+                    <p className="text-sm text-gray-700 mt-2">Billed {plan?.billedType}</p>
                   )}
                 </div>
 
