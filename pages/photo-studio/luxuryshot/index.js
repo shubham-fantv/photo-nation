@@ -378,7 +378,7 @@ const Index = () => {
           </div>
           <div className=" relative max-w-xl mx-auto pt-3 ">
             <div className="flex items-center gap-2 mb-3">
-              <h2 className="text-sm font-medium">Select Luxury Style</h2>
+              <h2 className="text-sm font-medium">Select Luxury Category</h2>
               <CustomTooltip title="Select atleast one of the styles to continue">
                 <Box
                   mt="-5px"
@@ -417,7 +417,7 @@ const Index = () => {
             </div>
             {/* Selected Category Images Grid */}
             <div className="flex items-center gap-2 ml-4">
-              <h2 className="text-sm font-medium">Style Categories</h2>
+              <h2 className="text-sm font-medium">Select Luxury Style</h2>
               <CustomTooltip title="Select atleast one of the categories to continue">
                 <Box
                   mt="-5px"

@@ -197,32 +197,24 @@ const PricingPlans = () => {
             const isCurrentPlan =
               !!userSubscriptionData && userSubscriptionData.subscriptionPlanId?._id === plan?._id;
 
-            let isUpgrade = false;
-            let isDowngrade = false;
-
-            if (!userData?.isTrialUser && userSubscriptionData?.subscriptionPlanId) {
-              isUpgrade = plan?.planNumber > currentPlanPriority;
-              isDowngrade = plan?.planNumber < currentPlanPriority;
-            }
-
             return (
               <div
                 key={index}
                 className={`rounded-lg p-8 flex flex-col relative transition-all ${
                   isCurrentPlan
-                    ? "bg-green-100 text-black border-2 border-green-200 shadow-xl" // ✅ light green
+                    ? "bg-green-100 text-black border-2 border-green-200 shadow-xl"
                     : plan?.isHighlighted
-                    ? "bg-blue-100 text-black border-2 border-blue-200 shadow-xl" // ✅ light green
-                    : "bg-[#F5F5F5] text-black border border-gray-400 shadow-xl" // ✅ medium gray
+                    ? "bg-blue-100 text-black border-2 border-blue-200 shadow-xl"
+                    : "bg-[#F5F5F5] text-black border border-gray-400 shadow-xl"
                 }`}
               >
-                {/* ✅ “Your Plan” badge */}
+                {/* ✅ "Your Plan" badge */}
                 {isCurrentPlan && (
                   <div className="absolute top-[-15px] left-[-10px] bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded shadow-md z-10">
                     Your Plan
                   </div>
                 )}
-                {/* Optional “Most Popular” badge */}
+                {/* Optional "Most Popular" badge */}
                 {plan?.isHighlighted && (
                   <div className="absolute top-[-15px] right-[-10px] bg-amber-400 text-black text-xs font-bold px-2 py-1 rounded shadow-md">
                     Most Popular
@@ -277,7 +269,7 @@ const PricingPlans = () => {
                   )}
                 </div>
 
-                {isCurrentPlan && !userData?.isTrialUser ? (
+                {isCurrentPlan ? (
                   <button
                     disabled
                     className="py-2 px-2 rounded-md mb-4 font-medium bg-gray-400 text-white cursor-not-allowed"
@@ -287,19 +279,9 @@ const PricingPlans = () => {
                 ) : (
                   <button
                     onClick={() => handleChoosePlan(plan)}
-                    className={`py-2 px-2 rounded-md mb-4 font-medium ${
-                      !userSubscriptionData?.subscriptionPlanId || userData?.isTrialUser
-                        ? "bg-blue-600" // new/trial user default
-                        : isUpgrade
-                        ? "bg-[#1E1E1E]"
-                        : "bg-yellow-600"
-                    } text-white hover:brightness-110`}
+                    className="py-2 px-2 rounded-md mb-4 font-medium bg-blue-600 text-white hover:brightness-110"
                   >
-                    {!userSubscriptionData?.subscriptionPlanId || userData?.isTrialUser
-                      ? "Choose Plan"
-                      : isUpgrade
-                      ? "Upgrade"
-                      : "Downgrade"}
+                    Choose Plan
                   </button>
                 )}
 

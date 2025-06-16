@@ -4,7 +4,7 @@ const AIAvatarSteps = ({ uploadedPhotos, aiGeneratedImages }) => {
   return (
     <div className="w-full mx-auto  mt-8 ">
       <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-6">
-        Steps to Generate AI Avatar
+        Steps to Generate Photo Avatar
       </h2>
 
       <div className="  bg-[#F6F4FF] rounded-xl p-6 border-2 border-[#E4DDFF]">

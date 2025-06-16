@@ -156,11 +156,11 @@ const index = (data) => {
             {/* Images Section */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-8 relative w-full">
               <img
-                src="https://assets.artistfirst.in/uploads/1747830071046-Arrival_Luxe_LuxuryShot_A1.jpg"
+                src="https://assets.artistfirst.in/uploads/1750093286896-Arrival_Luxe_LuxuryShot_A1_comp.jpg	"
                 className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
               <img
-                src="https://assets.artistfirst.in/uploads/1747830106502-Jet_Celebration_LuxuryShot_A1.jpg"
+                src="https://assets.artistfirst.in/uploads/1750093286902-Jet_Celebration_LuxuryShot_A1_comp.jpg	"
                 className="hidden md:block w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
             </div>
@@ -197,11 +197,11 @@ const index = (data) => {
             {/* Images Section */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-8 w-full">
               <img
-                src="https://assets.artistfirst.in/uploads/1747488821569-Custom_Avatar_Icon_1.jpg"
+                src="https://assets.artistfirst.in/uploads/1750093535135-1747488821569-Custom_Avatar_Icon_1_comp.jpg"
                 className="w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
               <img
-                src="https://assets.artistfirst.in/uploads/1747488851625-Custom_Avatar_Icon_2.jpg"
+                src="https://assets.artistfirst.in/uploads/1750093535143-1747488851625-Custom_Avatar_Icon_2_comp.jpg"
                 className=" hidden md:block w-full sm:w-[150px] lg:w-[200px] h-[150px] sm:h-[150px] lg:h-[200px] rounded-md object-cover mx-auto sm:mx-0"
               />
             </div>

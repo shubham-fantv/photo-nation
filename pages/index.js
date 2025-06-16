@@ -13,64 +13,64 @@ import useGTM from "../src/hooks/useGTM";
 const headshots = [
   {
     id: 1,
-    src: "/images/photo-studio/home/l1.png",
+    src: "https://assets.artistfirst.in/uploads/1747830337257-Forest_GT_LuxuryShot_A1.jpg",
     alt: "Professional headshot 1",
   },
   {
     id: 2,
-    src: "/images/photo-studio/home/l2.png",
+    src: "https://assets.artistfirst.in/uploads/1749402452057-Luxury_Football_Match_comp.jpg",
     alt: "Professional headshot 2",
   },
   {
     id: 3,
-    src: "/images/photo-studio/home/l3.png",
+    src: "https://assets.artistfirst.in/uploads/1749402340738-Luxury_Cave_Dinner_comp.jpg",
     alt: "Professional headshot 3",
   },
   {
     id: 4,
-    src: "/images/photo-studio/home/h1.jpg",
+    src: "https://assets.artistfirst.in/uploads/1750091923685-Biz_District_Headshot_A1_comp.jpg",
     alt: "Professional headshot 4",
   },
   {
     id: 5,
-    src: "/images/photo-studio/home/h2.jpg",
+    src: "https://assets.artistfirst.in/uploads/1750091924148-Coast_Deck_Headshot_A1_comp.jpg",
     alt: "Professional headshot 5",
   },
   {
     id: 6,
-    src: "/images/photo-studio/home/h3.jpg",
+    src: "https://assets.artistfirst.in/uploads/1750091924921-Sunlit_Lane_Headshot_A1_comp.jpg",
     alt: "Professional headshot 6",
   },
 
   // Bottom row - Mixed
   {
     id: 7,
-    src: "/images/photo-studio/home/l4.png",
+    src: "https://assets.artistfirst.in/uploads/1747830487670-Red_Carpet_Event_LuxuryShot_A1.jpg",
     alt: "Professional headshot 7",
   },
   {
     id: 8,
-    src: "/images/photo-studio/home/l5.png",
+    src: "https://assets.artistfirst.in/uploads/1749402690758-Luxury_Taj_Mahal_comp.jpg",
     alt: "Professional headshot 8",
   },
   {
     id: 9,
-    src: "/images/photo-studio/home/l6.png",
+    src: "https://assets.artistfirst.in/uploads/1747830470625-Monaco_Raceview_LuxuryShot_A1.jpg",
     alt: "Professional headshot 9",
   },
   {
     id: 10,
-    src: "/images/photo-studio/home/h4.jpg",
+    src: "https://assets.artistfirst.in/uploads/1750091924392-Corp_Suburb_Headshot_A1_comp.jpg",
     alt: "Professional headshot 10",
   },
   {
     id: 11,
-    src: "/images/photo-studio/home/h5.jpg",
+    src: "https://assets.artistfirst.in/uploads/1750091924389-Cruise_Deck_Headshot_A1_comp.jpg",
     alt: "Professional headshot 11",
   },
   {
     id: 12,
-    src: "/images/photo-studio/home/h6.jpg",
+    src: "https://assets.artistfirst.in/uploads/1750091923701-Bright_Lane_Headshot_A1_comp.jpg",
     alt: "Professional headshot 12",
   },
 ];
@@ -103,28 +103,28 @@ const Index = () => {
       id: 1,
       title: "UPLOAD PHOTOS",
       description:
-        "Upload 10-20 high-quality photos of yourself from different angles and lighting conditions.",
+        "Upload 10-20 high-quality photos of yourself from different angles and lighting conditions",
     },
     {
       image: PickStyle,
       id: 3,
-      title: " PICK ANY STYLE",
+      title: " PICK ANY CATEGORY",
       description:
-        "Select from various professional styles, backgrounds, and settings for your photos.",
+        "Select from various professional categories, styles, backgrounds, and settings for your photos",
     },
     {
       image: Generate,
       id: 2,
       title: "GENERATE",
       description:
-        "Our advanced AI analyzes your photos and learns your unique features and characteristics.",
+        "Our advanced AI analyzes your photos and learns your unique features and characteristics",
     },
 
     {
       image: Download,
       id: 4,
       title: "DOWNLOAD",
-      description: "Receive your stunning, professional-quality AI-generated photos in minutes.",
+      description: "Receive your stunning, professional-quality AI-generated photos in minutes",
     },
   ];
 
@@ -284,7 +284,7 @@ const Index = () => {
                     onClick={handleNavigationLaunch}
                     className="bg-[#000] border border-white text-white px-6 py-3 rounded-full text-base sm:text-lg font-semibold shadow-lg"
                   >
-                    Launch App
+                    Start Creating
                   </button>
                 </div>
               </div>
@@ -314,14 +314,14 @@ const Index = () => {
                       <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                         <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden">
                           <img
-                            src="/images/photo-studio/home/h1.jpg"
+                            src="https://assets.artistfirst.in/uploads/1750091923716-Green_Corridor_Headshot_A1_comp.jpg"
                             alt="Professional headshot 1"
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden">
                           <img
-                            src="/images/photo-studio/home/h2.jpg"
+                            src="https://assets.artistfirst.in/uploads/1750091924952-Sunset_Sea_Headshot_A1_comp.jpg"
                             alt="Professional headshot 2"
                             className="w-full h-full object-cover"
                           />
@@ -344,14 +344,14 @@ const Index = () => {
                       <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                         <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden">
                           <img
-                            src="https://assets.artistfirst.in/uploads/1747830089346-Altitude_Cabin_LuxuryShot_A1.jpg"
+                            src="https://assets.artistfirst.in/uploads/1750094991709-Altitude_Cabin_LuxuryShot_A1_comp.jpg"
                             alt="Luxury shot 1"
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden">
                           <img
-                            src="https://assets.artistfirst.in/uploads/1747830666578-Classic_Car_Rally_LuxuryShot_A1.jpg"
+                            src="https://assets.artistfirst.in/uploads/1750094991735-Classic_Car_Rally_LuxuryShot_A1_comp.jpg"
                             alt="Luxury shot 2"
                             className="w-full h-full object-cover"
                           />
