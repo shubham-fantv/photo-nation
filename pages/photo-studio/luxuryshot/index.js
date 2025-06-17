@@ -294,7 +294,7 @@ const Index = () => {
                   <div className="flex items-center justify-between mb-2">
                     <h1 className="font-semibold flex text-[#1E1E1E]">
                       Select upto {MAX_IMAGES} photos &nbsp;
-                      <CustomTooltip title="Please select at least 4 photos to see luxuryshot categories and styles">
+                      <CustomTooltip title="Please select at least 4 photos to see luxury photo categories and styles">
                         <Box
                           mt="-5px"
                           component="img"
@@ -378,8 +378,8 @@ const Index = () => {
           </div>
           <div className=" relative max-w-xl mx-auto pt-3 ">
             <div className="flex items-center gap-2 mb-3">
-              <h2 className="text-sm font-medium">Select Luxury Category</h2>
-              <CustomTooltip title="Select atleast one of the styles to continue">
+              <h2 className="text-sm font-medium">Luxury Category</h2>
+              <CustomTooltip title="Select atleast one of the categories to continue">
                 <Box
                   mt="-5px"
                   component="img"
@@ -417,8 +417,8 @@ const Index = () => {
             </div>
             {/* Selected Category Images Grid */}
             <div className="flex items-center gap-2 ml-4">
-              <h2 className="text-sm font-medium">Select Luxury Style</h2>
-              <CustomTooltip title="Select atleast one of the categories to continue">
+              <h2 className="text-sm font-medium">Luxury Styles</h2>
+              <CustomTooltip title="Select atleast one of the styles to continue">
                 <Box
                   mt="-5px"
                   component="img"

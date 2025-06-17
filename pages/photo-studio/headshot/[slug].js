@@ -259,7 +259,7 @@ export default function Index() {
                 </div>
 
                 <h2 className="text-sm font-medium mb-3">
-                  Select Headshot Style
+                  Headshot Styles
                 </h2>
                 <div className="flex gap-1 overflow-x-auto mb-4">
                   {mainImages.map((img, idx) => (

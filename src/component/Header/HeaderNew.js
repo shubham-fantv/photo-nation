@@ -40,7 +40,7 @@ const HeaderNew = ({ app }) => {
   const isActiveLink = (path) => {
     return currentPath === path;
   };
-  const { sendEvent } = useGTM();
+  const { sendEvent, sendGTM } = useGTM();
   const [isPopupVisible, setIsPopupVisible] = useState({
     login: false,
   });
@@ -370,6 +370,7 @@ const HeaderNew = ({ app }) => {
                 {!isActiveLink("/subscription") && isLoggedIn ? (
                   <CLink href={"/subscription"}>
                     <button
+                    onClick={() => sendGTM({ event: "upgradeButtonPN" })}
                       style={{
                         border: "1px solid #262626",
                         borderRadius: "12px",
