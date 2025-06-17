@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import useGTM from "../../src/hooks/useGTM";
+import { FANTV_API_URL } from "../../src/constant/constants";
 
 const index = () => {
   const router = useRouter();
@@ -12,10 +13,7 @@ const index = () => {
 
   const { refetch } = useQuery(
     `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`,
-    () =>
-      fetcher.get(
-        `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`
-      ),
+    () => fetcher.get(`${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`),
     {
       enabled: !!(userData?._id || userData?.id),
       refetchOnMount: "always",

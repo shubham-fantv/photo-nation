@@ -22,7 +22,7 @@ const Index = ({ masterData, template, slug }) => {
   const [imagePreview, setImagePreview] = useState("");
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState(template?.imageUrl);
-  
+
   const { userData } = useSelector((state) => state.user);
   const { sendEvent } = useGTM();
 
@@ -88,7 +88,7 @@ const Index = ({ masterData, template, slug }) => {
       email: userData?.email,
       name: userData?.name,
       prompt: prompt,
-      aspectRatio: aspectRatio
+      aspectRatio: aspectRatio,
     });
 
     const requestBody = {
@@ -96,7 +96,7 @@ const Index = ({ masterData, template, slug }) => {
       imageInput: image ? [image] : [],
       imageUrl: image ? image : "",
       creditsUsed: 1,
-      aspectRatio: aspectRatio
+      aspectRatio: aspectRatio,
     };
     console.log(requestBody);
     setLoading(true);
@@ -104,14 +104,13 @@ const Index = ({ masterData, template, slug }) => {
   };
 
   useEffect(() => {
-    
     const pickRandomQuote = () => {
       const randomIndex = Math.floor(Math.random() * quotes.length);
       setSubTitle(quotes[randomIndex]);
     };
     pickRandomQuote();
     const interval = setInterval(pickRandomQuote, 5000);
-  
+
     return () => clearInterval(interval);
   }, []);
 
@@ -151,7 +150,6 @@ const Index = ({ masterData, template, slug }) => {
           <div className="mb-4">
             <div className="flex justify-between flex-wrap">
               <h3 className="text-sm font-medium mb-2">Prompt</h3>
-              
             </div>
 
             <div className="bg-[#F5F5F5] rounded-lg p-3 flex justify-between items-start">
@@ -230,11 +228,11 @@ const Index = ({ masterData, template, slug }) => {
               </div>
             </div>
           </div>
-          {(
+          {
             <div className="mb-4">
               <AvatarDropdown data={masterData?.avatars} />
             </div>
-          )}
+          }
 
           {template?.visibility && (
             <div className="mb-4">
@@ -292,33 +290,31 @@ const Index = ({ masterData, template, slug }) => {
             </button>
           </div>
           <h3 className="text-sm text-[#1E1E1EB2] text-normal">Credits : 1</h3>
-
         </div>
       </div>
-      
+
       <div className="flex-1 flex flex-col items-center ">
-      <div className="w-full md:p-4 bg-[#F5F5F5]">
-                  <button
-                      onClick={() => router.back()}
-                      className="flex items-center text-sm mb-1 text-black"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Back
-                    </button>
-          </div>
-          <div className="w-full p-4 md:p-4 bg-[#F5F5F5] px-4 md:px-[30px] py-4 md:py-[30px]">
-            
+        <div className="w-full md:p-4 bg-[#F5F5F5]">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-sm mb-1 text-black"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Back
+          </button>
+        </div>
+        <div className="w-full p-4 md:p-4 bg-[#F5F5F5] px-4 md:px-[30px] py-4 md:py-[30px]">
           <div className="bg-[#FFFFFF0D] rounded-lg aspect-video flex items-center justify-center mb-4 m-auto max-h-[300px] md:max-h-[450px]">
             <div className="text-gray-500 w-full h-full">
               <img
@@ -381,7 +377,7 @@ export async function getServerSideProps(ctx) {
         "default"
       ),
     ]);
-    console.log("template",template?.data)
+    console.log("template", template?.data);
     return {
       props: {
         masterData: masterData?.data || [],
