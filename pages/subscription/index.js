@@ -25,7 +25,11 @@ const PricingPlans = () => {
 
   useQuery(
     `${FANTV_API_URL}/api/v1/subscription-plans`,
-    () => fetcher.get(`${FANTV_API_URL}/api/v1/subscription-plans`),
+    () => fetcher.get(`${FANTV_API_URL}/api/v1/subscription-plans`, {
+      headers: {
+        "x-project-source": "photonation",
+      },
+    },),
     {
       refetchOnMount: "always",
       onSuccess: ({ data }) => {
