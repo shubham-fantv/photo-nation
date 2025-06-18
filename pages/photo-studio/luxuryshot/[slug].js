@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Loading from "../../../src/component/common/Loading/loading";
+import useGTM from "../../../src/hooks/useGTM";
 
 export default function Index() {
   const [timeLeft, setTimeLeft] = useState(30);
@@ -19,6 +20,7 @@ export default function Index() {
   const [isLoading, setLoading] = useState(false);
   const [allAvatar, setAvatar] = useState();
   const [data, setData] = useState();
+  const { sendEvent } = useGTM();
 
   const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
   console.log("🚀 ~ Index ~ selectedImage:", selectedImage);

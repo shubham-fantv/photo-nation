@@ -13,7 +13,7 @@ import { useRef } from "react";
 import AIAvatarSteps from "../../../src/component/HeadShot/AIAvatarSteps";
 import BadPhotos from "../../../src/component/HeadShot/BadPhotos";
 import GoodPhotos from "../../../src/component/HeadShot/GoodPhotos";
-import { useGTM } from "../../../src/hooks/useGTM";
+import  useGTM  from "../../../src/hooks/useGTM";
 
 const Index = () => {
   const router = useRouter();

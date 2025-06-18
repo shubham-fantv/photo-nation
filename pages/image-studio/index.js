@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SectionCards from "../../src/component/SectionCards";
 import Link from "next/link";
 import fetcher from "../../src/dataProvider";
@@ -7,7 +7,7 @@ import { FANTV_API_URL } from "../../src/constant/constants";
 import { useQuery } from "react-query";
 import CardComponent from "../../src/component/CardComponent";
 import CommunityCreatedContent from "../../src/component/imageCommunityCreatedContent";
-import { useGTM } from "../../src/hooks/useGTM";
+import useGTM  from "../../src/hooks/useGTM";
 
 const index = () => {
   const [homeFeedData, setHomeFeedData] = useState([]);

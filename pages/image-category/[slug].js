@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SectionCards from "../../src/component/SectionCards";
 import Link from "next/link";
 import CommunityCreatedContent from "../../src/component/imageCommunityCreatedContent";
@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import fetcher from "../../src/dataProvider";
 import { FANTV_API_URL } from "../../src/constant/constants";
 import { useRouter } from "next/router";
-import { useGTM } from "../../src/hooks/useGTM";
+import useGTM from "../../src/hooks/useGTM";
 
 const index = () => {
   const [templates, setTemplates] = useState([]);

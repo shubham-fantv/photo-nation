@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Loading from "../../../src/component/common/Loading/loading";
-import { useGTM } from "../../../src/hooks/useGTM";
+import useGTM from "../../../src/hooks/useGTM";
 
 export default function Index() {
   const [timeLeft, setTimeLeft] = useState(30);
