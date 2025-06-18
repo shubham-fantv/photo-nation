@@ -7,11 +7,12 @@ import { useQuery } from "react-query";
 import fetcher from "../../src/dataProvider";
 import { FANTV_API_URL } from "../../src/constant/constants";
 import { useRouter } from "next/router";
+import { useGTM } from "../../src/hooks/useGTM";
 
 const index = () => {
   const [templates, setTemplates] = useState([]);
   const [category, setCategory] = useState([]);
-
+  const { sendEvent } = useGTM();
   const router = useRouter();
   useQuery(
     `${FANTV_API_URL}/api/v1/image_templates?limit=30`,
@@ -36,6 +37,14 @@ const index = () => {
       },
     }
   );
+  useEffect(() => {
+      sendEvent({
+        event: "page_view",
+        page_name: "Image Category Page",
+        page_url: window.location.href,
+        app_id: "Photonation",
+      });
+    }, []);
 
   return (
     <div>

@@ -7,9 +7,11 @@ import { FANTV_API_URL } from "../../src/constant/constants";
 import { useQuery } from "react-query";
 import CardComponent from "../../src/component/CardComponent";
 import CommunityCreatedContent from "../../src/component/imageCommunityCreatedContent";
+import { useGTM } from "../../src/hooks/useGTM";
 
 const index = () => {
   const [homeFeedData, setHomeFeedData] = useState([]);
+  const { sendEvent } = useGTM();
 
   useQuery(
     `${FANTV_API_URL}/api/v1/image_categories`,
@@ -34,6 +36,14 @@ const index = () => {
       },
     }
   );
+  useEffect(() => {
+      sendEvent({
+        event: "page_view",
+        page_name: "Image Studio Page",
+        page_url: window.location.href,
+        app_id: "Photonation",
+      });
+    }, []);
 
   return (
     <div>

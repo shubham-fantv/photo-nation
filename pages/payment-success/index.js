@@ -8,12 +8,15 @@ import { FANTV_API_URL } from "../../src/constant/constants";
 
 const index = () => {
   const router = useRouter();
-  const { userData } = useSelector((state) => state.user);
+  const { userData, setUserData } = useSelector((state) => state.user);
   const { sendEvent, sendGTM } = useGTM();
 
   const { refetch } = useQuery(
     `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`,
-    () => fetcher.get(`${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`),
+    () =>
+      fetcher.get(
+        `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`
+      ),
     {
       enabled: !!(userData?._id || userData?.id),
       refetchOnMount: "always",

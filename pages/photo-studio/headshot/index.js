@@ -65,10 +65,32 @@ const Index = () => {
   const [gender, setGender] = useState("");
 
   const handleClose = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Cancel",
+      page_name: "Photo Studio",
+      sub_page: "Head Shot",
+      interaction_type: "Standard Button",
+      button_id: "popup_avatar_details_cancel",
+      section_name: "Popup",
+      app_id: "photonation",
+    });
     setIsOpen(false);
   };
 
   const handleDone = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Done",
+      page_name: "Photo Studio",
+      sub_page: "Head Shot",
+      interaction_type: "Standard Button",
+      button_id: "popup_avatar_details_done",
+      section_name: "Popup",
+      name: avatarName,
+      gender: gender,
+      app_id: "photonation",
+    });
     setIsOpen(false);
     if (avatarName) {
       const requestBody = {
@@ -199,12 +221,31 @@ const Index = () => {
   );
 
   const handleGeneratePhotoAvatar = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Generate",
+      page_name: "Photo Studio",
+      sub_page: "Head Shot",
+      interaction_type: "Standard Button",
+      button_id: "headshot_creation_btn",
+      app_id: "photonation",
+    });
     if (imagePreviews.length > 0) {
       if (isLoggedIn) {
         if (userData.credits <= 0) {
           router.push("/subscription");
           return;
         }
+        sendEvent({
+          event: "popup_displayed",
+          popup_type: "Nudge",
+          popup_name: "Avatar Details",
+          popup_message_text:
+            "Before we start generating, Please enter avatar's name",
+          page_name: "Photo Studio",
+          sub_page: "Head Shot",
+          app_id: "photonation",
+        });
         handleOpenModal();
       } else {
         setIsPopupVisible(true);
@@ -277,6 +318,15 @@ const Index = () => {
     const progress = (selectedCount / MAX_IMAGES) * 100;
     setProgress(progress);
   }, [imagePreviews.length, MAX_IMAGES]);
+
+  useEffect(() => {
+      sendEvent({
+        event: "page_view",
+        page_name: "Photo Studio Head Shot Page",
+        page_url: window.location.href,
+        app_id: "Photonation",
+      });
+    }, []);
 
   return (
     <div className="flex flex-col md:flex-row text-black md:gap-4">

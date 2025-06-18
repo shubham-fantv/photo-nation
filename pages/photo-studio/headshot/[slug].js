@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Loading from "../../../src/component/common/Loading/loading";
+import { useGTM } from "../../../src/hooks/useGTM";
 
 export default function Index() {
   const [timeLeft, setTimeLeft] = useState(30);
@@ -19,6 +20,7 @@ export default function Index() {
   const [isLoading, setLoading] = useState(false);
   const [allAvatar, setAvatar] = useState();
   const [data, setData] = useState();
+  const { sendEvent } = useGTM();
 
   const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
 
@@ -31,7 +33,10 @@ export default function Index() {
   const router = useRouter();
   const { isLoading: avatarLoading } = useQuery(
     `${FANTV_API_URL}/api/v1/ai-avatar/photo-avatar/${router?.query?.slug}`,
-    () => fetcher.get(`${FANTV_API_URL}/api/v1/ai-avatar/photo-avatar/${router?.query?.slug}`),
+    () =>
+      fetcher.get(
+        `${FANTV_API_URL}/api/v1/ai-avatar/photo-avatar/${router?.query?.slug}`
+      ),
     {
       enabled: !!router.query.slug,
       refetchOnMount: "always",
@@ -44,7 +49,10 @@ export default function Index() {
 
   const { isLoading: createdAvatar } = useQuery(
     `${FANTV_API_URL}/api/v1/ai-avatar/user-avatars?page=1&limit=100`,
-    () => fetcher.get(`${FANTV_API_URL}/api/v1/ai-avatar/user-avatars?page=1&limit=100`),
+    () =>
+      fetcher.get(
+        `${FANTV_API_URL}/api/v1/ai-avatar/user-avatars?page=1&limit=100`
+      ),
     {
       enabled: !!router.query.slug,
       refetchOnMount: "always",
@@ -56,7 +64,10 @@ export default function Index() {
 
   const { mutate: generatePhotoAvatarApi } = useMutation(
     (obj) =>
-      fetcher.post(`${API_BASE_URL}/api/v1/ai-avatar/photo-avatar/${router.query.slug}`, obj),
+      fetcher.post(
+        `${API_BASE_URL}/api/v1/ai-avatar/photo-avatar/${router.query.slug}`,
+        obj
+      ),
     {
       onSuccess: (response) => {
         setLoading(false);
@@ -65,7 +76,8 @@ export default function Index() {
       onError: (error) => {
         setLoading(false);
         const defaultMessage = "Something went wrong. Please try again later.";
-        const message = error?.response?.data?.message || error?.message || defaultMessage;
+        const message =
+          error?.response?.data?.message || error?.message || defaultMessage;
         setSwalProps({
           icon: "error",
           show: true,
@@ -104,7 +116,9 @@ export default function Index() {
     {
       refetchOnMount: "always",
       onSuccess: ({ data }) => {
-        setHeadShotStyleData(data.filter((item) => item.category !== "Natural"));
+        setHeadShotStyleData(
+          data.filter((item) => item.category !== "Natural")
+        );
       },
     }
   );
@@ -145,6 +159,14 @@ export default function Index() {
   };
 
   const handleCategorySelect = (category) => {
+    sendEvent({
+      event: "box_clicked",
+      name: category,
+      page_name: "Photo Studio",
+      sub_page: "Head Shot",
+      app_id: "photonation",
+      box_id: "",
+    });
     setSelectedCategory(category);
   };
 
@@ -168,6 +190,15 @@ export default function Index() {
   const relatedImages = getRelatedImages();
 
   const handleDownload = async () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Download All",
+      page_name: "Photo Studio",
+      sub_page: "Head Shot",
+      interaction_type: "Standard Button",
+      button_id: "download_all_btn",
+      app_id: "photonation",
+    });
     const zip = new JSZip();
     const folder = zip.folder("headshots");
 
@@ -210,7 +241,7 @@ export default function Index() {
                     </span>{" "}
                     left to bring your image to life.
                   </h1>
-                  <p className=" text-sm text-gray-600 text-sm">
+                  <p className=" text-sm text-gray-600">
                     Rendering in progress. Magic doesn't happen in a blink
                   </p>
                 </div>
@@ -244,7 +275,19 @@ export default function Index() {
                           ? "border-purple-500"
                           : "border-transparent"
                       }`}
-                      onClick={() => router.replace(img?._id)}
+                      onClick={() => {
+                        router.replace(img?._id);
+                        sendEvent({
+                          event: "box_clicked",
+                          name: img?.name,
+                          gender: img?.gender,
+                          image: img?.finalImageUrl,
+                          page_name: "Photo Studio",
+                          sub_page: "Head Shot",
+                          box_id: `avatar_varation_box_${img?.name}`,
+                          app_id: "photonation",
+                        });
+                      }}
                     >
                       <img
                         src={img?.finalImageUrl}
@@ -258,9 +301,7 @@ export default function Index() {
                   ))}
                 </div>
 
-                <h2 className="text-sm font-medium mb-3">
-                  Headshot Styles
-                </h2>
+                <h2 className="text-sm font-medium mb-3">Headshot Styles</h2>
                 <div className="flex gap-1 overflow-x-auto mb-4">
                   {mainImages.map((img, idx) => (
                     <div

@@ -7,7 +7,7 @@ import SweetAlert2 from "react-sweetalert2";
 import Loading from "../../../src/component/common/Loading/loading";
 import { API_BASE_URL, FANTV_API_URL } from "../../../src/constant/constants";
 import fetcher from "../../../src/dataProvider";
-import { quotes } from "../../../src/utils/common";
+import { getPageName, quotes } from "../../../src/utils/common";
 import { useQuery } from "react-query";
 import { useRef } from "react";
 import AIAvatarSteps from "../../../src/component/HeadShot/AIAvatarSteps";
@@ -19,6 +19,7 @@ import ToolTipText from "../../../src/component/common/ToolTipText";
 import { Box } from "@mui/system";
 import useGTM from "../../../src/hooks/useGTM";
 import CustomTooltip from "../../../src/component/common/CustomTooltip";
+import router from "next/router";
 
 const uploadedPhotos = [
   "https://assets.artistfirst.in/uploads/1747830353356-Grand_Foyer_LuxuryShot_A1.jpg",
@@ -65,10 +66,32 @@ const Index = () => {
   const [gender, setGender] = useState("");
 
   const handleClose = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Cancel",
+      page_name: "Photo Studio",
+      sub_page: "Luxury Shot",
+      interaction_type: "Standard Button",
+      button_id: "popup_avatar_details_cancel",
+      section_name: "Popup",
+      app_id: "photonation",
+    });
     setIsOpen(false);
   };
 
   const handleDone = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Done",
+      page_name: "Photo Studio",
+      sub_page: "Luxury Shot",
+      interaction_type: "Standard Button",
+      button_id: "popup_avatar_details_done",
+      section_name: "Popup",
+      name: avatarName,
+      gender: gender,
+      app_id: "photonation",
+    });
     setIsOpen(false);
     if (avatarName) {
       const requestBody = {
@@ -201,12 +224,31 @@ const Index = () => {
   );
 
   const handleGeneratePhotoAvatar = () => {
+    sendEvent({
+      event: "button_clicked",
+      button_text: "Generate",
+      page_name: "Photo Studio",
+      sub_page: "Luxury Shot",
+      interaction_type: "Standard Button",
+      button_id: "luxuryshot_creation_btn",
+      app_id: "photonation",
+    });
     if (imagePreviews.length > 0) {
       if (isLoggedIn) {
         if (userData.credits <= 0) {
           router.push("/subscription");
           return;
         }
+        sendEvent({
+          event: "popup_displayed",
+          popup_type: "Nudge",
+          popup_name: "Avatar Details",
+          popup_message_text:
+            "Before we start generating, Please enter avatar's name",
+          page_name: "Photo Studio",
+          sub_page: "Luxury Shot",
+          app_id: "photonation",
+        });
         handleOpenModal();
       } else {
         setIsPopupVisible(true);
@@ -279,6 +321,15 @@ const Index = () => {
     const progress = (selectedCount / MAX_IMAGES) * 100;
     setProgress(progress);
   }, [imagePreviews.length, MAX_IMAGES]);
+
+  useEffect(() => {
+      sendEvent({
+        event: "page_view",
+        page_name: "Photo Studio Luxury Shot Page",
+        page_url: window.location.href,
+        app_id: "Photonation",
+      });
+    }, []);
 
   return (
     <div className="flex flex-col md:flex-row text-black md:gap-4">

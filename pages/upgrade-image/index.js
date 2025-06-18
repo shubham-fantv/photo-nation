@@ -39,7 +39,7 @@ const index = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const aspectRatioData = ["16:9", "9:16", "1:1"];
-  const durationData = ["5 sec", "15 sec", "30 sec","60 sec"];
+  const durationData = ["5 sec", "15 sec", "30 sec", "60 sec"];
   const [isLoading, setLoading] = useState(false);
   const [swalProps, setSwalProps] = useState({});
 
@@ -65,7 +65,8 @@ const index = () => {
   ];
 
   const generateMagicPrompt = () => {
-    const randomPrompt = magicPrompts[Math.floor(Math.random() * magicPrompts.length)];
+    const randomPrompt =
+      magicPrompts[Math.floor(Math.random() * magicPrompts.length)];
     setPrompt(randomPrompt);
   };
 
@@ -90,11 +91,15 @@ const index = () => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("https://upload.artistfirst.in/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "https://upload.artistfirst.in/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setImage(response?.data?.data?.[0]?.url);
       setImagePreview(URL.createObjectURL(file));
     } catch (error) {
@@ -116,10 +121,14 @@ const index = () => {
         setPrompt("");
         setLoading(false);
         if (userData?.isTrialUser) {
-            localStorage.setItem("lastTrialAction", Date.now().toString());
-          }
+          localStorage.setItem("lastTrialAction", Date.now().toString());
+        }
         //console.log("I AM HERE", response?.data._id);
-        router.replace(`/upgrade-image/${tool}?id=${response?.data._id}`,undefined, { scroll: false });
+        router.replace(
+          `/upgrade-image/${tool}?id=${response?.data._id}`,
+          undefined,
+          { scroll: false }
+        );
         // setSwalProps({
         //   icon: "success",
         //   show: true,
@@ -137,10 +146,11 @@ const index = () => {
 
         const defaultMessage = "Something went wrong. Please try again later.";
 
-        const message = error?.response?.data?.message || error?.message || defaultMessage;
+        const message =
+          error?.response?.data?.message || error?.message || defaultMessage;
 
         setSwalProps({
-            key: Date.now(), // or use a counter
+          key: Date.now(), // or use a counter
           icon: "error",
           show: true,
           title: "Error",
@@ -162,11 +172,12 @@ const index = () => {
         return;
       }
 
-      const creditsUsed = 20*parseInt((duration.replace("sec", "").trim()/5),10);
-      
-    if (userData.credits <= 0 || userData.credits < 1) {
+      const creditsUsed =
+        20 * parseInt(duration.replace("sec", "").trim() / 5, 10);
+
+      if (userData.credits <= 0 || userData.credits < 1) {
         setSwalProps({
-            key: Date.now(), // or use a counter 
+          key: Date.now(), // or use a counter
           show: true,
           title: `⏳ You only have ${userData.credits} Credits Left!`,
           text: "Upgrade now to buy Credits, unlock HD, pro voices, and longer videos.",
@@ -175,84 +186,88 @@ const index = () => {
           icon: "warning",
           preConfirm: () => {
             router.push("/subscription");
-          }
+          },
         });
-        } else {
-            if (userData?.isTrialUser) {
-              const lastActionTime = parseInt(localStorage.getItem("lastTrialAction") || 0, 10);
-              const now = Date.now();
-            
-              if (now - lastActionTime < RATE_LIMIT_INTERVAL_MS) {
-                const waitTime = Math.ceil((RATE_LIMIT_INTERVAL_MS - (now - lastActionTime)) / 1000 / 60);
-                setSwalProps({
-                    key: Date.now(), // or use a counter 
-                  show: true,
-                  title: "⏳ Please wait",
-                  text: `Free users can generate only one image every 12 hours. Try again in ${waitTime} mins. Upgrade now to unlock unlimited generation and HD quality`,
-                  icon: "info",
-                  confirmButtonText: "View Plans",
-                  showCancelButton: true,
-                  preConfirm: () => {
-                    router.push("/subscription");
-                  }
-                });
-                return;
-              } else {
-
-                    const requestBody = {
-                        prompt,
-                        imageInput: image ? [image] : [],
-                        creditsUsed: creditsUsed,
-                        aspectRatio: aspectRatio,
-                        duration: duration,
-                        caption: captionEnabled,
-                        voiceover: voiceoverEnabled,
-                        ...(image && { imageUrl: encodeURI(image) })  // ✅ encode URL with spaces
-                    };
-                    setLoading(true);
-
-                    sendEvent({
-                        event: "Generate Video",
-                        email: userData?.email,
-                        name: userData?.name,
-                        prompt: prompt,
-                        aspectRatio: aspectRatio,
-                        duration: duration,
-                        caption: captionEnabled,
-                        voiceover: voiceoverEnabled,
-                        ...(image && { imageUrl: image }), // ✅ only include if `image` is truthy
-                    });
-
-                    generateVideoApi(requestBody);
-              }
       } else {
+        if (userData?.isTrialUser) {
+          const lastActionTime = parseInt(
+            localStorage.getItem("lastTrialAction") || 0,
+            10
+          );
+          const now = Date.now();
 
-      const requestBody = {
-        prompt,
-        imageInput: image ? [image] : [],
-        creditsUsed: creditsUsed,
-        aspectRatio: aspectRatio,
-        duration: duration,
-        caption: captionEnabled,
-        voiceover: voiceoverEnabled,
-        ...(image && { imageUrl: encodeURI(image) })  // ✅ encode URL with spaces
-      };
-      setLoading(true);
+          if (now - lastActionTime < RATE_LIMIT_INTERVAL_MS) {
+            const waitTime = Math.ceil(
+              (RATE_LIMIT_INTERVAL_MS - (now - lastActionTime)) / 1000 / 60
+            );
+            setSwalProps({
+              key: Date.now(), // or use a counter
+              show: true,
+              title: "⏳ Please wait",
+              text: `Free users can generate only one image every 12 hours. Try again in ${waitTime} mins. Upgrade now to unlock unlimited generation and HD quality`,
+              icon: "info",
+              confirmButtonText: "View Plans",
+              showCancelButton: true,
+              preConfirm: () => {
+                router.push("/subscription");
+              },
+            });
+            return;
+          } else {
+            const requestBody = {
+              prompt,
+              imageInput: image ? [image] : [],
+              creditsUsed: creditsUsed,
+              aspectRatio: aspectRatio,
+              duration: duration,
+              caption: captionEnabled,
+              voiceover: voiceoverEnabled,
+              ...(image && { imageUrl: encodeURI(image) }), // ✅ encode URL with spaces
+            };
+            setLoading(true);
 
-      sendEvent({
-        event: "Generate Video",
-        email: userData?.email,
-        name: userData?.name,
-        prompt: prompt,
-        aspectRatio: aspectRatio,
-        duration: duration,
-        caption: captionEnabled,
-        voiceover: voiceoverEnabled,
-        ...(image && { imageUrl: image }), // ✅ only include if `image` is truthy
-      });
+            sendEvent({
+              event: "Generate Video",
+              email: userData?.email,
+              name: userData?.name,
+              prompt: prompt,
+              aspectRatio: aspectRatio,
+              duration: duration,
+              caption: captionEnabled,
+              voiceover: voiceoverEnabled,
+              ...(image && { imageUrl: image }), // ✅ only include if `image` is truthy
+            });
 
-      generateVideoApi(requestBody);
-    }}
+            generateVideoApi(requestBody);
+          }
+        } else {
+          const requestBody = {
+            prompt,
+            imageInput: image ? [image] : [],
+            creditsUsed: creditsUsed,
+            aspectRatio: aspectRatio,
+            duration: duration,
+            caption: captionEnabled,
+            voiceover: voiceoverEnabled,
+            ...(image && { imageUrl: encodeURI(image) }), // ✅ encode URL with spaces
+          };
+          setLoading(true);
+
+          sendEvent({
+            event: "Generate Video",
+            email: userData?.email,
+            name: userData?.name,
+            prompt: prompt,
+            aspectRatio: aspectRatio,
+            duration: duration,
+            caption: captionEnabled,
+            voiceover: voiceoverEnabled,
+            ...(image && { imageUrl: image }), // ✅ only include if `image` is truthy
+          });
+
+          generateVideoApi(requestBody);
+        }
+      }
     } else {
       setIsPopupVisible(true);
     }
@@ -277,6 +292,15 @@ const index = () => {
 
   useEffect(() => {
     textareaRef.current?.focus(); // Auto-focus on mount (for testing)
+  }, []);
+
+  useEffect(() => {
+    sendEvent({
+      event: "page_view",
+      page_name: "Upgrade Image Page",
+      page_url: window.location.href,
+      app_id: "Photonation",
+    });
   }, []);
 
   return (
@@ -352,7 +376,13 @@ const index = () => {
             {/* <span className="w-4 h-3 border border-black rounded-sm"></span> */}
             <select
               value={duration}
-              onChange={(e) => {setDuration(e.target.value);setCredits(20*parseInt((e.target.value.replace("sec", "").trim()/5),10))}}
+              onChange={(e) => {
+                setDuration(e.target.value);
+                setCredits(
+                  20 *
+                    parseInt(e.target.value.replace("sec", "").trim() / 5, 10)
+                );
+              }}
               className="bg-[#FFF]"
             >
               {durationData?.map((item) => (
@@ -441,7 +471,10 @@ const index = () => {
           handleModalClose={() => setIsPopupVisible(false)}
         />
       )}
-      <SweetAlert2 {...swalProps} onConfirm={(handleConfirm) => setSwalProps({ show: false })} />
+      <SweetAlert2
+        {...swalProps}
+        onConfirm={(handleConfirm) => setSwalProps({ show: false })}
+      />
     </div>
   );
 };

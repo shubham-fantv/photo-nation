@@ -13,6 +13,7 @@ import { useRef } from "react";
 import AIAvatarSteps from "../../../src/component/HeadShot/AIAvatarSteps";
 import BadPhotos from "../../../src/component/HeadShot/BadPhotos";
 import GoodPhotos from "../../../src/component/HeadShot/GoodPhotos";
+import { useGTM } from "../../../src/hooks/useGTM";
 
 const Index = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const Index = () => {
   const [files, setFiles] = useState([]);
   const inputRef = useRef(null);
   const [headShotStyleData, setHeadShotStyleData] = useState([]);
+  const { sendEvent} = useGTM();
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [groupedData, setGroupedData] = useState({});
@@ -276,6 +278,15 @@ const Index = () => {
     const progress = (selectedCount / MAX_IMAGES) * 100;
     setProgress(progress);
   }, [imagePreviews.length, MAX_IMAGES]);
+
+  useEffect(() => {
+      sendEvent({
+        event: "page_view",
+        page_name: "Headshot Page",
+        page_url: window.location.href,
+        app_id: "Photonation",
+      });
+    }, []);
 
   return (
     <div className="flex flex-col md:flex-row text-black md:gap-4">

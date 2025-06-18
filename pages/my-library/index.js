@@ -17,7 +17,8 @@ const VideoGrid = ({ data, data1 }) => {
   const itemsPerPage = 20;
   const [mediaType, setMediaType] = useState("video");
 
-  const currentMedia = mediaType === "video" ? [...myVideo].reverse() : [...myImage].reverse();
+  const currentMedia =
+    mediaType === "video" ? [...myVideo].reverse() : [...myImage].reverse();
   const totalPages = Math.ceil(currentMedia.length / itemsPerPage);
 
   const paginatedMedia = currentMedia.slice(
@@ -45,9 +46,20 @@ const VideoGrid = ({ data, data1 }) => {
     setMyImage(data1 || []);
   }, [data, data1]);
 
+  useEffect(() => {
+    sendEvent({
+      event: "page_view",
+      page_name: "My Library Page",
+      page_url: window.location.href,
+      app_id: "Photonation",
+    });
+  }, []);
+
   return (
     <div className="min-h-screen w-full md:p-6">
-      <h1 className="text-black text-3xl font-bold text-center mb-8">My Library</h1>
+      <h1 className="text-black text-3xl font-bold text-center mb-8">
+        My Library
+      </h1>
 
       <div className="flex mb-8 w-[200px] bg-gray-200 rounded-full p-1">
         <button
@@ -122,12 +134,16 @@ const VideoGrid = ({ data, data1 }) => {
 
               {item?.status !== "completed" && (
                 <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-xl">
-                  <p className="text-white font-medium text-lg">{item?.status}</p>
+                  <p className="text-white font-medium text-lg">
+                    {item?.status}
+                  </p>
                 </div>
               )}
             </div>
             <div className="pt-1 flex justify-between items-center">
-              <h3 className="text-black text-sm truncate">&nbsp;{item?.prompt}</h3>
+              <h3 className="text-black text-sm truncate">
+                &nbsp;{item?.prompt}
+              </h3>
             </div>
             <h3 className="text-black text-sm truncate">
               &nbsp;{moment(item?.created_at).format("MMMM D, YYYY, h:mm A")}
@@ -160,7 +176,9 @@ const VideoGrid = ({ data, data1 }) => {
           ))}
 
           <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
             disabled={currentPage === totalPages}
             className="px-3 py-1 border rounded disabled:opacity-50"
           >

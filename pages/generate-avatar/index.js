@@ -15,6 +15,7 @@ import LoginAndSignup from "../../src/component/feature/Login";
 import { useRouter } from "next/router";
 import SweetAlert2 from "react-sweetalert2";
 import useGTM from "../../src/hooks/useGTM";
+import { send } from "process";
 
 const aspectRatioSizeMap = {
   "1:1": "w-4 h-4",
@@ -36,7 +37,6 @@ const index = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isPromptModalVisible, setIsPromptModalVisible] = useState(false);
 
-
   const aspectRatioData = ["16:9", "9:16", "1:1"];
   const [isLoading, setLoading] = useState(false);
   const [swalProps, setSwalProps] = useState({});
@@ -45,7 +45,7 @@ const index = () => {
     list
       .sort(() => 0.5 - Math.random()) // Shuffle
       .slice(0, count); // Pick first 3
-  
+
   const [samplePrompts, setSamplePrompts] = useState([]);
 
   const [form, setForm] = useState({
@@ -59,11 +59,19 @@ const index = () => {
     style: "cinematic portrait",
   });
 
-
   // Update prompt when form changes
   useEffect(() => {
-    const { age, gender, ethnicity, hairColor, eyeColor, clothing, expression, style } = form;
-    const generated = "Enter the prompt to create an AI Avatar"; 
+    const {
+      age,
+      gender,
+      ethnicity,
+      hairColor,
+      eyeColor,
+      clothing,
+      expression,
+      style,
+    } = form;
+    const generated = "Enter the prompt to create an AI Avatar";
     //const generated = `A ${age}-year-old ${gender} of ${ethnicity} descent with ${hairColor} hair and ${eyeColor} eyes, wearing a ${clothing} in a ${expression} expression, styled as a ${style}.`;
     setPrompt(generated);
   }, [form]);
@@ -80,13 +88,13 @@ const index = () => {
     "An astronaut relaxing on a tropical alien beach",
     // Add more here...
   ];
-  
+
   const generateMagicPrompt = () => {
     const randomPrompt =
       magicPrompts[Math.floor(Math.random() * magicPrompts.length)];
     setPrompt(randomPrompt);
   };
-  
+
   const { sendEvent } = useGTM();
 
   const { isLoggedIn, userData } = useSelector((state) => state.user);
@@ -110,11 +118,15 @@ const index = () => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("https://upload.artistfirst.in/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "https://upload.artistfirst.in/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setImage(response?.data?.data?.[0]?.url);
       setImagePreview(URL.createObjectURL(file));
     } catch (error) {
@@ -149,14 +161,12 @@ const index = () => {
       },
       onError: (error) => {
         setLoading(false);
-      
+
         const defaultMessage = "Something went wrong. Please try again later.";
-      
+
         const message =
-          error?.response?.data?.message ||
-          error?.message ||
-          defaultMessage;
-      
+          error?.response?.data?.message || error?.message || defaultMessage;
+
         setSwalProps({
           icon: "error",
           show: true,
@@ -230,6 +240,15 @@ const index = () => {
     textareaRef.current?.focus(); // Auto-focus on mount (for testing)
   }, []);
 
+  useEffect(() => {
+    sendEvent({
+      event: "page_view",
+      page_name: "Generate Avatar",
+      page_url: window.location.href,
+      app_id: "Photonation",
+    });
+  }, []);
+
   return (
     <div>
       {isLoading && <Loading title={"Please wait"} subTitle={subTitle} />}
@@ -237,9 +256,7 @@ const index = () => {
         <h1 className="text-black text-[32px] font-semibold text-center leading-[38px]">
           AI-Powered Avatar Creation
         </h1>
-        <p className="text-[#1E1E1EB2] pt-2 text-base font-normal text-center">
-          
-        </p>
+        <p className="text-[#1E1E1EB2] pt-2 text-base font-normal text-center"></p>
       </div>
 
       <div className="flex mt-8 w-full flex-col gap-4 rounded-lg bg-[#F5F5F5] p-4 shadow-md">
@@ -302,11 +319,11 @@ const index = () => {
           </button>
           <div className="flex-1 hidden md:block"></div>
           <button
-  onClick={() => setIsPromptModalVisible(true)}
-  className="flex items-center gap-2 rounded-md bg-[#FFF] px-4 py-2 text-sm text-[#1E1E1E] shadow-md transition-all hover:bg-gray-100"
->
-  🪄 Create Avatar Prompt
-</button>
+            onClick={() => setIsPromptModalVisible(true)}
+            className="flex items-center gap-2 rounded-md bg-[#FFF] px-4 py-2 text-sm text-[#1E1E1E] shadow-md transition-all hover:bg-gray-100"
+          >
+            🪄 Create Avatar Prompt
+          </button>
 
           <button
             onClick={() => handleGenerateImage()}
@@ -315,19 +332,18 @@ const index = () => {
             ✨ Generate
           </button>
         </div>
-        
       </div>
-       <div className="flex flex-wrap gap-2 mt-4 overflow-auto">
-          {samplePrompts.map((sample, idx) => (
-            <button
-              key={idx}
-              onClick={() => setPrompt(sample)}
-              className="w-[360px] h-[75px] rounded-full bg-[#F5F5F5] px-5 py-4 text-sm text-[#1E1E1E] shadow-sm hover:bg-gray-200 transition-all"
-            >
-              {sample}
-            </button>
-          ))}
-        </div>
+      <div className="flex flex-wrap gap-2 mt-4 overflow-auto">
+        {samplePrompts.map((sample, idx) => (
+          <button
+            key={idx}
+            onClick={() => setPrompt(sample)}
+            className="w-[360px] h-[75px] rounded-full bg-[#F5F5F5] px-5 py-4 text-sm text-[#1E1E1E] shadow-sm hover:bg-gray-200 transition-all"
+          >
+            {sample}
+          </button>
+        ))}
+      </div>
 
       {templates.length > 0 && (
         <div className="mt-12">
@@ -345,100 +361,103 @@ const index = () => {
         />
       )}
       <SweetAlert2 {...swalProps} onConfirm={handleConfirm} />
-    
+
       {isPromptModalVisible && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-    <div className="bg-white w-full max-w-5xl rounded-xl p-6 relative">
-      <button
-        onClick={() => setIsPromptModalVisible(false)}
-        className="absolute top-4 right-4 text-gray-500 hover:text-black text-lg"
-      >
-        ✕
-      </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white w-full max-w-5xl rounded-xl p-6 relative">
+            <button
+              onClick={() => setIsPromptModalVisible(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-black text-lg"
+            >
+              ✕
+            </button>
 
-      <h2 className="text-xl font-semibold mb-6">Create Avatar Prompt</h2>
+            <h2 className="text-xl font-semibold mb-6">Create Avatar Prompt</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm text-gray-700 font-medium mb-4">
-        {[
-          ["Age", "age", "number"],
-          ["Gender", "gender", "select"],
-          ["Ethnicity", "ethnicity", "text"],
-          ["Hair Color", "hairColor", "text"],
-          ["Eye Color", "eyeColor", "text"],
-          ["Clothing", "clothing", "text"],
-          ["Expression", "expression", "text"],
-          ["Avatar Style", "style", "text"],
-        ].map(([label, name, type]) => (
-          <div key={name} className="flex flex-col">
-            <label htmlFor={name}>{label}</label>
-            {type === "select" ? (
-              <select
-                name={name}
-                value={form[name]}
-                onChange={handleChange}
-                className="border p-2 rounded-md"
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm text-gray-700 font-medium mb-4">
+              {[
+                ["Age", "age", "number"],
+                ["Gender", "gender", "select"],
+                ["Ethnicity", "ethnicity", "text"],
+                ["Hair Color", "hairColor", "text"],
+                ["Eye Color", "eyeColor", "text"],
+                ["Clothing", "clothing", "text"],
+                ["Expression", "expression", "text"],
+                ["Avatar Style", "style", "text"],
+              ].map(([label, name, type]) => (
+                <div key={name} className="flex flex-col">
+                  <label htmlFor={name}>{label}</label>
+                  {type === "select" ? (
+                    <select
+                      name={name}
+                      value={form[name]}
+                      onChange={handleChange}
+                      className="border p-2 rounded-md"
+                    >
+                      <option value="male">male</option>
+                      <option value="female">female</option>
+                      <option value="non-binary">non-binary</option>
+                    </select>
+                  ) : (
+                    <input
+                      type={type}
+                      name={name}
+                      value={form[name]}
+                      onChange={handleChange}
+                      className="border p-2 rounded-md"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setIsPromptModalVisible(false)}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md"
               >
-                <option value="male">male</option>
-                <option value="female">female</option>
-                <option value="non-binary">non-binary</option>
-              </select>
-            ) : (
-              <input
-                type={type}
-                name={name}
-                value={form[name]}
-                onChange={handleChange}
-                className="border p-2 rounded-md"
-              />
-            )}
-          </div>
-        ))}
-      </div>
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  const {
+                    age,
+                    gender,
+                    ethnicity,
+                    hairColor,
+                    eyeColor,
+                    clothing,
+                    expression,
+                    style,
+                  } = form;
 
-      <div className="flex justify-end gap-3">
-        <button
-          onClick={() => setIsPromptModalVisible(false)}
-          className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => {
-            const {
-                age,
-                gender,
-                ethnicity,
-                hairColor,
-                eyeColor,
-                clothing,
-                expression,
-                style,
-              } = form;
-              
-              const promptParts = [
-                age ? `${age}-year-old` : "",
-                gender,
-                ethnicity ? `of ${ethnicity} descent` : "",
-                hairColor || eyeColor ? `with ${hairColor ? hairColor + " hair" : ""}${hairColor && eyeColor ? " and " : ""}${eyeColor ? eyeColor + " eyes" : ""}` : "",
-                clothing ? `wearing a ${clothing}` : "",
-                expression ? `in a ${expression} expression` : "",
-                style ? `styled as a ${style}` : "",
-              ];
-              
-              const generated = promptParts.filter(Boolean).join(", ") + ".";
-              setPrompt(generated.trim());
-              setIsPromptModalVisible(false);
-          }}
-          className="px-4 py-2 bg-black text-white rounded-md"
-        >
-          Use Prompt
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-    
-    
+                  const promptParts = [
+                    age ? `${age}-year-old` : "",
+                    gender,
+                    ethnicity ? `of ${ethnicity} descent` : "",
+                    hairColor || eyeColor
+                      ? `with ${hairColor ? hairColor + " hair" : ""}${
+                          hairColor && eyeColor ? " and " : ""
+                        }${eyeColor ? eyeColor + " eyes" : ""}`
+                      : "",
+                    clothing ? `wearing a ${clothing}` : "",
+                    expression ? `in a ${expression} expression` : "",
+                    style ? `styled as a ${style}` : "",
+                  ];
+
+                  const generated =
+                    promptParts.filter(Boolean).join(", ") + ".";
+                  setPrompt(generated.trim());
+                  setIsPromptModalVisible(false);
+                }}
+                className="px-4 py-2 bg-black text-white rounded-md"
+              >
+                Use Prompt
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

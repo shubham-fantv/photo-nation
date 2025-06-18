@@ -122,7 +122,10 @@ const HeaderNew = ({ app }) => {
   const isMobile = useIsMobile(app?.deviceParsedInfo?.device?.isMobile);
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setIsMenuOpen(open);
@@ -130,7 +133,10 @@ const HeaderNew = ({ app }) => {
 
   useQuery(
     `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`,
-    () => fetcher.get(`${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`),
+    () =>
+      fetcher.get(
+        `${FANTV_API_URL}/api/v1/users/${userData?._id || userData?.id}`
+      ),
     {
       enabled: !!(userData?._id || userData?.id),
       refetchOnMount: "always",
@@ -207,7 +213,9 @@ const HeaderNew = ({ app }) => {
 
             {isLoggedIn && (
               <div className="">
-                <h2 className=" text-black text-base font-semibold px-4 mb-2">Profile</h2>
+                <h2 className=" text-black text-base font-semibold px-4 mb-2">
+                  Profile
+                </h2>
                 <ul>
                   <li>
                     <CLink
@@ -227,16 +235,22 @@ const HeaderNew = ({ app }) => {
                       <div className="flex items-center  py-2">
                         <div
                           className={`flex items-center rounded-xl p-3 w-full ${
-                            isActiveLink("/subscription") ? "bg-[#FFFFFF0D] font-bold" : ""
+                            isActiveLink("/subscription")
+                              ? "bg-[#FFFFFF0D] font-bold"
+                              : ""
                           }`}
-                          style={isActiveLink("/subscription") ? activeStyle : {}}
+                          style={
+                            isActiveLink("/subscription") ? activeStyle : {}
+                          }
                         >
                           <img
                             style={{ height: "20px", width: "20px" }}
                             src="/images/icons/subscription.svg"
                           />
                           <span className="text-sm text-black pl-2">
-                            {userData?.isTrialUser ? "Upgrade" : "Manage Subscription"}
+                            {userData?.isTrialUser
+                              ? "Upgrade"
+                              : "Manage Subscription"}
                           </span>
                         </div>
                       </div>
@@ -268,7 +282,9 @@ const HeaderNew = ({ app }) => {
                               })
                             }
                             className={`flex items-center rounded-xl p-3 w-full ${
-                              isActiveLink("/usage") ? "bg-[#FFFFFF0D] font-bold" : ""
+                              isActiveLink("/usage")
+                                ? "bg-[#FFFFFF0D] font-bold"
+                                : ""
                             }`}
                             style={isActiveLink("/usage") ? activeStyle : {}}
                           >
@@ -276,7 +292,9 @@ const HeaderNew = ({ app }) => {
                               style={{ height: "20px", width: "20px" }}
                               src="/images/icons/usage.svg"
                             />
-                            <span className="text-sm text-black pl-2">Usage</span>
+                            <span className="text-sm text-black pl-2">
+                              Usage
+                            </span>
                           </div>
                         </div>
                       </CLink>
@@ -370,7 +388,17 @@ const HeaderNew = ({ app }) => {
                 {!isActiveLink("/subscription") && isLoggedIn ? (
                   <CLink href={"/subscription"}>
                     <button
-                    onClick={() => sendGTM({ event: "upgradeButtonPN" })}
+                      onClick={() => {
+                        sendGTM({ event: "upgradeButtonPN" });
+                        sendEvent({
+                          event: "button_clicked",
+                          button_text: "Upgrade",
+                          page_name: "Header",
+                          interaction_type: "Standard button",
+                          button_id: "hdr_upgrade_btn",
+                          app_id: "Photonation",
+                        });
+                      }}
                       style={{
                         border: "1px solid #262626",
                         borderRadius: "12px",
@@ -420,10 +448,16 @@ const HeaderNew = ({ app }) => {
           </Box>
           {isMobile && (
             <Box sx={styles.profileNavBar} onClick={toggleDrawer(true)}>
-              <MenuIcon style={{ color: "black", marginTop: "8px", marginLeft: "10px" }} />
+              <MenuIcon
+                style={{ color: "black", marginTop: "8px", marginLeft: "10px" }}
+              />
             </Box>
           )}
-          <Drawer anchor="right" open={isMenuOpen} onClose={toggleDrawer(false)}>
+          <Drawer
+            anchor="right"
+            open={isMenuOpen}
+            onClose={toggleDrawer(false)}
+          >
             {drawerContent}
           </Drawer>
         </Box>
