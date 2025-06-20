@@ -62,6 +62,7 @@ const Index = () => {
 
   const [avatarName, setAvatarName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [almostTherePopup, setAlmostTherePopup] = useState(false);
   const [gender, setGender] = useState("");
 
   const handleClose = () => {
@@ -233,7 +234,16 @@ const Index = () => {
     if (imagePreviews.length > 0) {
       if (isLoggedIn) {
         if (userData.credits <= 0) {
-          router.push("/subscription");
+          sendEvent({
+            event: "popup_displayed",
+            popup_type: "Nudge",
+            popup_name: "Subscribe",
+            popup_message_text: "You're almost there",
+            page_name: "Photo Studio",
+            sub_page: "Head Shot",
+            app_id: "photonation",
+          });
+          setAlmostTherePopup(true);
           return;
         }
         sendEvent({
@@ -320,13 +330,13 @@ const Index = () => {
   }, [imagePreviews.length, MAX_IMAGES]);
 
   useEffect(() => {
-      sendEvent({
-        event: "page_view",
-        page_name: "Photo Studio Head Shot Page",
-        page_url: window.location.href,
-        app_id: "Photonation",
-      });
-    }, []);
+    sendEvent({
+      event: "page_view",
+      page_name: "Photo Studio Head Shot Page",
+      page_url: window.location.href,
+      app_id: "Photonation",
+    });
+  }, []);
 
   return (
     <div className="flex flex-col md:flex-row text-black md:gap-4">
@@ -629,6 +639,59 @@ const Index = () => {
           open={isPopupVisible}
           handleModalClose={() => setIsPopupVisible(false)}
         />
+      )}
+
+      {almostTherePopup && (
+        <div className="min-h-screen relative">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-3xl p-8 w-full max-w-lg mx-4 relative shadow-2xl">
+              <div className="text-5xl mb-4 text-center">⭐</div>
+              <h2 className="text-xl font-semibold mb-2 text-center">
+                You're Almost There!
+              </h2>
+              <p className="text=gray-600 mb-6 text-center">
+                Subscribe now to get access to professional headshots ans luxury
+                photos.
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  className="px-4 py-2 bg-white border-2 border-black text-black rounded-lg hover:bg-gray-100 transition"
+                  onClick={() => {
+                    setAlmostTherePopup(false);
+                    sendEvent({
+                      event: "button_clicked",
+                      button_text: "Cancel",
+                      page_name: "Photo Studio",
+                      sub_page: "Head Shot",
+                      interaction_type: "Standard Button",
+                      button_id: "subscribe_cancel_btn",
+                      app_id: "photonation",
+                    });
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+                  onClick={() => {
+                    sendEvent({
+                      event: "button_clicked",
+                      button_text: "View Plans",
+                      page_name: "Photo Studio",
+                      sub_page: "Head Shot",
+                      interaction_type: "Standard Button",
+                      button_id: "subscribe_view_plans_btn",
+                      app_id: "photonation",
+                    });
+                    router.push("/subscription");
+                  }}
+                >
+                  View Plans
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
       <SweetAlert2
         {...swalProps}
