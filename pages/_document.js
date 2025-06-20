@@ -26,25 +26,25 @@ class MyDocument extends Document {
           <link rel="preload" as="video" href="/video/bgVideo.webm" type="video/webm" />
           <link rel="preload" as="video" href="/video/tokenAnimation.webm" type="video/webm" />
 
-          <meta name="name" content="PhotoNation - Create cinematic photos using AI" />
+          <meta name="name" content="PhotoNation - AI powered photos that truly impress" />
           <meta
             name="description"
-            content="PhotoNation - Create cinematic photos using AI across multiple categories - luxury photos, headshots, anime, cartoon, ghibli, etc and multiple industry use cases."
+            content="PhotoNation - Your best look, crafted by AI. Generate photos with professional polish and luxurious style to command attention anywhere"
           />
           {<meta name="image" content="http://localhost:3000/images/logo.svg" />}
           <meta property="og:url" content={process.env.NEXT_PUBLIC_WEB_URL} />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="PhotoNation - Create cinematic photos using AI" />
+          <meta property="og:title" content="PhotoNation - AI powered photos that truly impress" />
           <meta
             property="og:description"
-            content="PhotoNation - Create cinematic photos using AI across multiple categories - luxury photos, headshots, anime, cartoon, ghibli, etc and multiple industry use cases."
+            content="PhotoNation - Your best look, crafted by AI. Generate photos with professional polish and luxurious style to command attention anywhere"
             />
           {<meta property="og:image" content="http://localhost:3000/images/logo.svg" />}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="PhotoNation - Create cinematic photos using AI" />
+          <meta name="twitter:title" content="PhotoNation - AI powered photos that truly impress" />
           <meta
             name="twitter:description"
-            content="PhotoNation - Create cinematic photos using AI across multiple categories - luxury photos, headshots, anime, cartoon, ghibli, etc and multiple industry use cases."
+            content="PhotoNation - Your best look, crafted by AI. Generate photos with professional polish and luxurious style to command attention anywhere"
             />
           {<meta name="twitter:image" content="http://localhost:3000/images/logo.svg" />}
         </Head>
