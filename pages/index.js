@@ -253,16 +253,16 @@ const Index = () => {
                   </p>
                 </div>
 
-                {/* Steps Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12 lg:mb-16 px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12 lg:mb-16 ">
                   {steps.map((step) => (
                     <div key={step.id} className="flex flex-col">
                       <div className="rounded-xl mb-4 lg:mb-6 border-4 sm:border-[7px] border-[#FFFFFF33]">
-                        <div className="bg-white rounded-xl h-48 sm:h-56 lg:h-64 flex items-center justify-center">
-                          {/* <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-600 text-center">
-                            {step.title}
-                          </h3> */}
-                          <Lottie animationData={step.image} loop={true} />
+                        <div className="bg-white rounded-xl h-[140px] sm:h-56 lg:h-64 w-full flex items-center justify-center overflow-hidden">
+                          <Lottie
+                            animationData={step.image}
+                            loop={true}
+                            className="w-full h-full max-h-[140px] sm:max-h-full"
+                          />
                         </div>
                       </div>
 
