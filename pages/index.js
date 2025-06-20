@@ -257,11 +257,11 @@ const Index = () => {
                   {steps.map((step) => (
                     <div key={step.id} className="flex flex-col">
                       <div className="rounded-xl mb-4 lg:mb-6 border-4 sm:border-[7px] border-[#FFFFFF33]">
-                        <div className="bg-white rounded-xl h-[140px] sm:h-56 lg:h-64 w-full flex items-center justify-center overflow-hidden">
+                        <div className="bg-white rounded-xl h-[160px] sm:h-56 lg:h-64 w-full flex items-center justify-center overflow-hidden">
                           <Lottie
                             animationData={step.image}
                             loop={true}
-                            className="w-full h-full max-h-[140px] sm:max-h-full"
+                            className="w-full h-full max-h-[160px] sm:max-h-full"
                           />
                         </div>
                       </div>
